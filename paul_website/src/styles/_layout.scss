@@ -1,3 +1,5 @@
+@use "./foundation" as *;
+
 .container { @include container; }
 
 /* 공용 섹션 여백 */

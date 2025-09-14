@@ -1,8 +1,29 @@
-.nav {
-  @include sticky-header;
+@use "../foundation" as *;
+
+/* 모든 곳에서 같은 높이를 쓰기 위해 공통 변수 */
+:root {
+  --nav-h: clamp(56px, 7.2vw, 72px);
+}
+
+nav {
+  /* ❗️sticky 대신 fixed 로 */
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: var(--nav-h);
+  z-index: 1000;
+
   border-bottom: 1px solid $border;
   background: rgba(0, 0, 0, 0.9);
-  mask-image: linear-gradient(to right, transparent 0, black 24px, black calc(100% - 24px), transparent 100%);
+  backdrop-filter: saturate(140%) blur(8px);
+
+  /* 양 끝 페이드 마스크 (있어도 되고 빼도 됨) */
+  mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    black 24px,
+    black calc(100% - 24px),
+    transparent 100%
+  );
 }
 
 .nav__wrap {
@@ -14,20 +35,21 @@
 }
 
 .nav__list {
-  height: 60px;
+  height: var(--nav-h);             /* ← 고정 높이 사용 */
   display: flex;
   gap: 15px;
   align-items: center;
   justify-content: flex-start;
   overflow-x: auto;
   overflow-y: hidden;
-  -webkit-overflow-scrolling: touch;
   white-space: nowrap;
   -webkit-overflow-scrolling: touch;
 
+  /* 스크롤바 숨김 */
   scrollbar-width: none;
   -ms-overflow-style: none;
 }
+.nav__list::-webkit-scrollbar { display: none; }
 
 .nav__item {
   position: relative;
@@ -42,18 +64,18 @@
   font-size: clamp(13px, 1.4vw, 20px);
   white-space: nowrap;
   flex: 0 0 auto;
-  ::-webkit-scrollbar { display: none;}
+
   &:hover { background: #111; }
 }
 
 .nav__item--active { background: #111; }
 
+/* 활성 탭 아래 얇은 라인 */
 .nav__item--active::after {
   content: "";
   position: absolute;
-  left: 8px;
-  right: 8px;
-  bottom: -6px;
+  left: 8px; right: 8px;
+  bottom: -6px;                     /* 필요하면 -4 ~ -8 사이로 조절 */
   height: 2px;
   background: #fff;
   border-radius: 2px;

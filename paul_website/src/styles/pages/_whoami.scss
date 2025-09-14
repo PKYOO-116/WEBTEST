@@ -1,0 +1,40 @@
+@use "../foundation" as *;
+
+/* 헤더(네비) 고정 높이를 변수로 – 실제 네비 높이에 맞춰 조절 */
+:root { --nav-h: 56px; } /* 예: 56px */
+
+.whoPage{
+  /* 선택: 섹션 단위로 ‘탁탁’ 붙는 스냅 스크롤 */
+  scroll-snap-type: y mandatory;
+  overflow-y: scroll;              /* 페이지 자체가 스크롤 컨테이너 */
+  height: calc(100vh - var(--nav-h));
+  overscroll-behavior-y: contain;
+}
+
+/* 각 섹션 공통 규격 */
+.whoSec{
+  position: relative;
+  /* 신형 뷰포트 단위 우선 사용 + 구형 fallback */
+  min-block-size: calc(100svh - var(--nav-h));
+  min-block-size: calc(100dvh - var(--nav-h));
+  @supports not (height: 100svh) {
+    min-block-size: calc(100vh - var(--nav-h));
+  }
+
+  /* 중앙 배치용 레이아웃은 자유롭게 */
+  display: grid;
+  align-items: center;
+
+  /* 섹션 내부 여백(콘텐츠용).  이건 'container' 안쪽에서 써도 OK */
+  padding-block: clamp(24px, 4vw, 48px);
+
+  /* 스크롤 스냅 포인트 */
+  scroll-snap-align: start;
+  scroll-margin-top: var(--nav-h);
+}
+
+.container{
+
+}
+
+// html, body { overflow-x: hidden; }

@@ -1,8 +1,4 @@
-import React from "react";
-
-import icLinkedIn from "../logos/LI-In-Bug.png";
-import icGitHub   from "../logos/github-mark-white.png";
-import icEmail    from "../logos/email.png";
+import {icLinkedIn, icGitHub, icEmail} from "../assets";
 
 export default function Footer() {
   return (

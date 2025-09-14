@@ -1,0 +1,23 @@
+/* debug.scss — 디버깅용 섹션 테두리 표시 */
+
+/* 모든 공통 섹션 */
+.whoSec {
+  border: 2px dashed red;
+}
+
+/* 각 섹션별 개별 색상 */
+.pkyoo {
+  border: 2px solid blue;
+}
+.education {
+  border: 2px solid green;
+}
+.experience {
+  border: 2px solid orange;
+}
+.community {
+  border: 2px solid purple;
+}
+.skills {
+  border: 2px solid cyan;
+}

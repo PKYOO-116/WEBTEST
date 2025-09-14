@@ -1,0 +1,70 @@
+/* Education section */
+.education {
+  display: flex;
+  align-items: center; /* 수직 가운데 */
+}
+
+.edu__wrap {
+  display: grid;
+  gap: clamp(32px, 4vw, 48px);
+}
+
+.edu__title {
+  font-size: clamp(24px, 3vw, 32px);
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.edu__item {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.edu__info {
+  font: 400 clamp(14px, 1.5vw, 16px)/1.4 sans-serif;
+  opacity: 0.85;
+}
+
+.edu__meta {
+  font-weight: 500;
+}
+
+.edu__time {
+  font-size: clamp(13px, 1.4vw, 15px);
+  opacity: 0.7;
+}
+
+.edu__row {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  align-items: center;
+  gap: 16px;
+}
+
+.edu__logo {
+  width: clamp(64px, 8vw, 92px);
+  height: clamp(64px, 8vw, 92px);
+  object-fit: contain;
+  display: block;
+}
+
+.logo-box {
+  background: #fff;
+  padding: 6px;
+  box-sizing: content-box;
+  border-radius: 10px;
+}
+
+.edu__degree {
+  font: 700 clamp(16px, 2vw, 20px)/1.3 sans-serif;
+}
+
+.edu__major {
+  font: 500 clamp(15px, 1.8vw, 18px)/1.4 sans-serif;
+}
+
+.edu__note {
+  font: 400 clamp(13px, 1.5vw, 15px)/1.4 sans-serif;
+  opacity: 0.8;
+}
