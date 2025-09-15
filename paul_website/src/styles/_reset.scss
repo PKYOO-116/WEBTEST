@@ -5,6 +5,7 @@
 *::after { box-sizing: border-box; }
 
 html, body, #root { height: 100%; }
+body { overflow: hidden; }          /* 바디 스크롤 막고 내부 컨테이너가 스크롤 */
 
 body {
   margin: 0;

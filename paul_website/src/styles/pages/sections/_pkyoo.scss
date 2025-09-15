@@ -1,17 +1,37 @@
-.pkyoo {
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+/* Desktop --------------------------------------------------------------------------------------------------------------------------------- */
+@media (min-width: 1025px) {
+  .pkyoo {
+    height: 100dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-  /* 메뉴 높이(60px 정도)만큼 위로 올림 */
-  transform: translateY(-130px);
-
-  &__title {
-    margin: 0;
-    font: 900 clamp(15px, 7vw, 140px)/1.1 sans-serif;
-    text-align: center;
-    line-height: 1.05;
-    letter-spacing: -0.02em;
+    &__title {
+      margin: 0;
+      font: 900 clamp(15px, 7vw, 140px)/1.1 sans-serif;
+      text-align: center;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+    }
   }
+}
+/* Tablet --------------------------------------------------------------------------------------------------------------------------------- */
+@media (min-width: 601px) and (max-width: 1024px) {
+  .pkyoo {
+    height: 100svh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &__title {
+      margin: 0;
+      font: 900 clamp(15px, 7vw, 140px)/1.1 sans-serif;
+      text-align: center;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+    }
+  }
+}
+/* Mobile --------------------------------------------------------------------------------------------------------------------------------- */
+@media (max-width: 600px) {
 }

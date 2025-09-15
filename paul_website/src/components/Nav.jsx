@@ -4,7 +4,6 @@ export default function Nav() {
   const links = [
     { to: "/", label: "Home" },
     { to: "/whoami", label: "Who Am I" },
-    { to: "/projects", label: "Projects" },
     { to: "/daily", label: "Daily" },
     { to: "/contact", label: "Contact" },
   ];

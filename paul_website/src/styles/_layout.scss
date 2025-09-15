@@ -1,16 +1,44 @@
+/* src/styles/_layout.scss */
 @use "./foundation" as *;
 
-.container { @include container; }
-
-/* 공용 섹션 여백 */
-.section {
-  scroll-margin-top: 72px; // 헤더 가림 방지
-  padding-block: clamp(40px, 6vw, 64px);
-  &__title { font-size: clamp(24px, 3.2vw, 32px); font-weight: 700; }
-  &__subtitle { margin-top: 6px; color: $text-muted; font-size: 14px; }
+/* 1) 공통 컨테이너 */
+.container { 
+  @include container; 
 }
 
-/* 카드/보더 톤 */
+/* 2) 섹션 기본 여백 & 앵커 스크롤 보정 */
+.section {
+  /* 앵커로 점프할 때 nav에 가리지 않게 */
+  scroll-margin-top: var(--nav-h);
+
+  /* 페이지 레이아웃에서 쓰는 기본 상하 여백 (필요시 유지/조절) */
+  padding-block: clamp(40px, 6vw, 64px);
+
+  &__title   { font-size: clamp(24px, 3.2vw, 32px); font-weight: 700; }
+  &__subtitle{ margin-top: 6px; color: $text-muted; font-size: 14px; }
+}
+
+/* 3) “네비 고정”으로 바뀌었으니, 
+      모든 페이지 루트가 nav 높이만큼 아래서 시작하도록 오프셋 부여 */
+main, .page, .whoPage, .home, .projects, .daily, .contact {
+  padding-top: var(--nav-h);
+}
+
+/* 4) 스냅 스크롤(Who Am I 같은 섹션 기반 페이지에서 사용)
+   - 래퍼에 .snapY, 각 섹션에 .snapSection을 부여하면
+     한 화면씩 “딱” 넘어가는 스크롤이 된다. */
+.snapY {
+  height: 100svh;            /* 모바일 환경에서 안전하게 viewport 채우기 */
+  overflow-y: auto;
+  scroll-snap-type: y mandatory;
+}
+
+.snapY > .snapSection {
+  min-height: calc(100svh - var(--nav-h)); /* nav 높이만큼 제외한 한 화면 */
+  scroll-snap-align: start;
+}
+
+/* 5) 카드/보더 톤(기존 유지) */
 .card {
   border: 1px solid $border;
   border-radius: 16px;

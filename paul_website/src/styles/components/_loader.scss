@@ -1,7 +1,5 @@
 @use "../foundation" as *;
 
-/* loader.scss (또는 main.scss의 로더 섹션) */
-
 .loader { position: fixed; inset: 0; z-index: 9999; pointer-events:none; }
 
 .loader__bar{
