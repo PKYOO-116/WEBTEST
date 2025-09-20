@@ -1,4 +1,4 @@
-@use "../foundation" as *;
+@use "../foundation" as f;
 
 .footer{
   margin: 100px 0 0;
@@ -27,7 +27,7 @@
 .footer__label{
   display:inline-flex; align-items:center; gap:10px;
   min-width: 110px;
-  font:600 clamp(12px,1.4vw,16px)/1.2 sans-serif;
+  font:600 clamp(12px,1.4vw,16px)/1.2 f.$font-base;
   color: rgba(255,255,255,.95);
 }
 .footer__label img{ width:18px; height:18px; object-fit:contain; }
@@ -41,14 +41,14 @@
 
 .footer__value{
   color:#fff; opacity:.92; text-decoration:none;
-  font:400 clamp(12px,1.5vw,16px)/1.5 sans-serif;
+  font:400 clamp(12px,1.5vw,16px)/1.5 f.$font-base;
   word-break: break-word;
 }
 .footer__value:hover{ text-decoration:underline; }
 
 /* name on right */
 .footer__name{
-  font:1000 clamp(18px, 3vw,100px)/1.1 sans-serif;
+  font:1000 clamp(18px, 3vw,100px)/1.1 f.$font-base;
   color:#fff; text-align:right; white-space:nowrap;
 }
 

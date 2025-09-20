@@ -1,16 +1,21 @@
-// 색상
+// Colors
 $black: #000000;
 $white: #ffffff;
+$material: #121212;
 $border: #1a1a1a;
 $text-muted: rgba(#fff, 0.88);
 
-// 타이포
-$font-base: sans-serif;
+$exp-kpi: #3949ab;
 
-// 레이아웃
+// Fonts
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Archivo:wght@400;600;700&display=swap');
+$font-base: 'Archivo', 'Open Sans', sans-serif;
+// $font-l2: ;
+// $font-l3: ;
+// $font-l4: ;
+
+
+// Layout...?
 $container-max: 1200px;
 $gutter: 24px;
-
-// 브레이크포인트
-$bp-md: 768px;
-$bp-lg: 1024px;

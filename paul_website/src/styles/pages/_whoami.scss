@@ -1,35 +1,28 @@
 @use "../foundation" as *;
 
-/* 공통: Who Am I 페이지 루트 */
 .whoPage {
-  /* 폴백 → 신형 순으로 높이 지정 */
   height: 100vh;
   height: 100svh;
-  @supports (height: 100dvh) {
-    height: 100dvh;
-  }
+  @supports (height: 100dvh) { height: 100dvh; }
 
   overflow-y: auto;
   overflow-x: clip;
   -webkit-overflow-scrolling: touch;
   touch-action: pan-y;
-  scroll-behavior: smooth;
+
+  /* ✅ scroll-snap-type 제거 */
+  scroll-behavior: smooth; /* 자연 스크롤만 */
 }
 
 .whoSec {
-  border-top: 2px solid #121212;
-  border-bottom: 2px solid #121212;
-  /* 폴백 → 신형 순으로 ‘한 화면’ 확보 */
   min-height: 100vh;
   min-height: 100svh;
-  @supports (min-height: 100dvh) {
-    min-height: 100dvh;
-  }
+  @supports (min-height: 100dvh) { min-height: 100dvh; }
 
   display: grid;
-  /* 핵심: 제목(auto) / 본문(1fr) / 하단바(auto) */
   grid-template-rows: auto 1fr auto;
-
   box-sizing: border-box;
-  overflow: hidden; /* 내부 스크롤 금지 → 상위(whoPage)로 위임 */
+  overflow: hidden;
+
+  border-top: 1pt solid $material;
 }

@@ -20,7 +20,9 @@ export const experienceData = [
       { label: "Dashboards", value: "5+" },
       { label: "Update frequency", value: "Daily" },
     ],
-    tech: ["Python", "Pandas", "SQL", "Power BI"],
+    tech: ["Python", "SQL", "DAX", "Power BI", "MS Excel",
+      "Database", "Energy", "Insight", "Data Analysis", "Data Visualization",
+    ],
   },
   {
     id: "excello",
@@ -28,7 +30,7 @@ export const experienceData = [
     logo: logoExcello,
     title: "Project Manager | Strategic Planning Assistant Manager",
     period: "2021.04 – 2022.10 (1y 7m)",
-    location: "Seoul, South Korea",
+    location: "South Korea",
     website: "https://iexcello.com/",
     bullets: [
       "Analyzed business data and supported C-suite in investment and funding decisions",
@@ -48,7 +50,7 @@ export const experienceData = [
     logo: logoKDB,
     title: "SME Banking Intern",
     period: "2019.08 – 2019.11 (4m)",
-    location: "Seoul, South Korea",
+    location: "South Korea",
     website: "https://www.kdb.co.kr/index.jsp",
     bullets: [
       "Conducted market research and analysis for SME financial evaluations",

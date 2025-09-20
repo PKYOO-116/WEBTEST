@@ -1,5 +1,4 @@
 import { useRef } from "react";
-// import useSectionPager from "../hooks/useSectionPaper";
 import Pkyoo from "./sections/pkyoo";
 import Education from "./sections/education";
 import Experience from "./sections/experience";
