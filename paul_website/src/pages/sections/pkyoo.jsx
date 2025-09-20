@@ -5,11 +5,11 @@ export default function Pkyoo() {
     <section className="pkyoo">
         <h1 className="pkyoo__title">
             <Typewriter
-                words={["Paul Keunchan Yoo"]}
-                typeSpeed={50}
-                deleteSpeed={0}
-                delaySpeed={400}
-                cursor
+              words={["Paul Keunchan Yoo"]}
+              typeSpeed={50}
+              deleteSpeed={0}
+              delaySpeed={400}
+              cursor
             />
         </h1>
     </section>

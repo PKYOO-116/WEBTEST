@@ -1,55 +1,35 @@
 @use "../foundation" as *;
 
-/* Desktop --------------------------------------------------------------------------------------------------------------------------------- */
-@media (min-width: 1201px) {
-  .whoPage{
+/* 공통: Who Am I 페이지 루트 */
+.whoPage {
+  /* 폴백 → 신형 순으로 높이 지정 */
+  height: 100vh;
+  height: 100svh;
+  @supports (height: 100dvh) {
     height: 100dvh;
-    overflow-y: auto;
   }
 
-  .whoSec{
+  overflow-y: auto;
+  overflow-x: clip;
+  -webkit-overflow-scrolling: touch;
+  touch-action: pan-y;
+  scroll-behavior: smooth;
+}
+
+.whoSec {
+  border-top: 2px solid #121212;
+  border-bottom: 2px solid #121212;
+  /* 폴백 → 신형 순으로 ‘한 화면’ 확보 */
+  min-height: 100vh;
+  min-height: 100svh;
+  @supports (min-height: 100dvh) {
     min-height: 100dvh;
-    height: 100dvh;
-    display: grid;
-  }
-}
-/* Tablet --------------------------------------------------------------------------------------------------------------------------------- */
-@media (min-width: 601px) and (max-width: 1200px) {
-  .whoPage{
-    height: 100svh;
-    overflow-y: auto;
-    scroll-snap-type: y mandatory;  /* 스냅 켜기 */
-    scroll-behavior: smooth;
-    overscroll-behavior-y: contain; /* 부모로 스크롤 전파 방지 */
-    -webkit-overflow-scrolling: touch;
-    touch-action: pan-y;
   }
 
-  .whoSec{
-    height: 100svh;
-    display: grid;
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
-    box-sizing: border-box;
-  }
-}
-/* Mobile --------------------------------------------------------------------------------------------------------------------------------- */
-@media (max-width: 600px) {
-  .whoPage{
-    height: 100svh;
-    overflow-y: auto;
-    scroll-snap-type: y mandatory;  /* 스냅 켜기 */
-    scroll-behavior: smooth;
-    overscroll-behavior-y: contain; /* 부모로 스크롤 전파 방지 */
-    -webkit-overflow-scrolling: touch;
-    touch-action: pan-y;
-  }
+  display: grid;
+  /* 핵심: 제목(auto) / 본문(1fr) / 하단바(auto) */
+  grid-template-rows: auto 1fr auto;
 
-  .whoSec{
-    height: 100svh;
-    display: grid;
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
-    box-sizing: border-box;
-  }
+  box-sizing: border-box;
+  overflow: hidden; /* 내부 스크롤 금지 → 상위(whoPage)로 위임 */
 }

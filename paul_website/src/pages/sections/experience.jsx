@@ -1,80 +1,15 @@
-// src/components/experience.jsx
-import React, { useEffect, useMemo, useRef, useState } from "react";
-import {
-  logoExcello,
-  logoFPM,
-  logoSYPM,
-  viewsIcon,
-  heartIcon,
-} from "../../assets";
-
-const experienceData = [
-  {
-    id: "excello-analyst",
-    company: "EXCELLO",
-    logo: logoExcello,
-    title: "Data Analyst",
-    period: "2022.02 – 2023.02",
-    location: "Seoul, KR",
-    website: "https://excello.example.com",
-    bullets: [
-      "자동화된 대시보드 업데이트 파이프라인 구축(ETL 주기 24h→2h)",
-      "고열·고압 설비 에너지 효율 분석으로 연간 비용 8% 절감",
-      "C-suite 의사결정 지원 리포트 주 1회 발행",
-    ],
-    kpis: [
-      { label: "Cost ↓", value: "8%" },
-      { label: "ETL 주기", value: "2h" },
-      { label: "Alerts/월", value: "120+" },
-    ],
-    tech: ["Python", "SQL", "Airflow", "Tableau", "GCP"],
-  },
-  {
-    id: "usc-ml",
-    company: "USC Projects",
-    logo: logoFPM,
-    title: "ML Engineer (Project)",
-    period: "2023.09 – 2024.05",
-    location: "Los Angeles, CA",
-    website: "https://usc.example.com",
-    bullets: [
-      "Spark RDD + XGBoost로 대규모 추천 실험 파이프라인",
-      "영화 리뷰 LSTM/CNN 감성분석, AUC 0.92 달성",
-    ],
-    kpis: [
-      { label: "AUC", value: "0.92" },
-      { label: "Throughput", value: "2.1x" },
-    ],
-    tech: ["Spark", "XGBoost", "TensorFlow", "Keras", "Flask"],
-  },
-  {
-    id: "usc-da",
-    company: "USC Facilities",
-    logo: logoSYPM,
-    title: "Data Analyst (Student)",
-    period: "2021.09 – 2022.05",
-    location: "Los Angeles, CA",
-    website: "https://facilities.usc.edu/",
-    bullets: [
-      "시설 데이터 정제/표준화 및 비용 구조 분석",
-      "월간 임원 보고서 자동화로 리드타임 40% 단축",
-    ],
-    kpis: [
-      { label: "Lead time ↓", value: "40%" },
-      { label: "표준지표", value: "36" },
-    ],
-    tech: ["Pandas", "SQL", "Tableau"],
-  },
-  // 필요 시 더 추가…
-];
+import { useEffect, useRef, useState } from "react";
+import { viewsIcon, heartIcon } from "../../assets";
+import { experienceData } from "../../data/experienceData";
+import { Typewriter } from "react-simple-typewriter";
 
 const LIKE_STORAGE_KEY = "exp_likes_v1";
 
 export default function Experience() {
-  const items = useMemo(() => experienceData, []);
+  const items = experienceData;
+  
   const [index, setIndex] = useState(0);
 
-  // 좋아요(로컬 저장)
   const [likes, setLikes] = useState(() => {
     try {
       const raw = localStorage.getItem(LIKE_STORAGE_KEY);
@@ -93,19 +28,27 @@ export default function Experience() {
   const touchDeltaX = useRef(0);
 
   const clamp = (n) => Math.max(0, Math.min(n, items.length - 1));
-  const goTo = (i) => setIndex(clamp(i));
   const next = () => setIndex((i) => clamp(i + 1));
   const prev = () => setIndex((i) => clamp(i - 1));
+  const goTo = (i) => setIndex(clamp(i));
 
-  // 키보드 ←/→
   useEffect(() => {
     const onKey = (e) => {
-      if (e.key === "ArrowRight") next();
-      if (e.key === "ArrowLeft") prev();
+      const tag = (e.target?.tagName || "").toLowerCase();
+      if (tag === "input" || tag === "textarea" || e.target?.isContentEditable) return;
+
+      if (e.key === "ArrowRight") {
+        e.preventDefault();
+        next();
+      }
+      if (e.key === "ArrowLeft") {
+        e.preventDefault();
+        prev();
+      }
     };
-    window.addEventListener("keydown", onKey);
+    window.addEventListener("keydown", onKey, { passive: false });
     return () => window.removeEventListener("keydown", onKey);
-  }, []);
+  }, [items.length]);
 
   // 터치 스와이프
   const onTouchStart = (e) => {
@@ -140,7 +83,6 @@ export default function Experience() {
     window.open(url, "_blank", "noopener,noreferrer");
   };
 
-  // ===== 검색(순환) =====
   const [query, setQuery] = useState("");
   const [searchProgress, setSearchProgress] = useState({}); // { [lowerQuery]: lastIndex }
 
@@ -177,10 +119,16 @@ export default function Experience() {
 
   return (
     <section id="experience" className="experience whoSec" aria-label="Experience section">
-      {/* 타이틀(섹션 내부, Viewport 바깥 좌상단) */}
-      <h1 className="exp__title">Experience</h1>
+      <h1 className="exp__title">
+        <Typewriter
+          words={["Experience"]}
+          typeSpeed={50}
+          deleteSpeed={0}
+          delaySpeed={400}
+          cursor
+        />
+      </h1>
 
-      {/* 오른쪽 로고 — 섹션 기준 absolute (fixed 아님) */}
       <div className="exp__sideBrand" aria-hidden="true">
         {items[index]?.logo && (
           <img src={items[index].logo} alt="" className="exp__sideBrandImg" />
@@ -188,17 +136,16 @@ export default function Experience() {
       </div>
 
       <div className="exp__column">
-        {/* 뷰포트 '바깥' 우상단 검색 */}
         <div className="exp__searchRow">
           <form className="exp__search" onSubmit={onSearch} role="search">
             <input
               type="search"
-              placeholder="Search experiences..."
+              placeholder="Search Keywords"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               aria-label="Search experiences"
             />
-            <button type="submit">Go</button>
+            <button type="submit">Search</button>
           </form>
         </div>
 
@@ -226,8 +173,8 @@ export default function Experience() {
                 <header className="exp__slideHeader">
                   <div className="exp__heading">
                     <div className="exp__badge">
-                      <span className="exp__company">{job.company}</span>
-                      <span className="exp__dot">•</span>
+                      <span className="exp__company">[ {job.company} ]</span>
+                      <span className="exp__dot">-</span>
                       <span className="exp__role">{job.title}</span>
                     </div>
                     <div className="exp__meta">
@@ -283,7 +230,6 @@ export default function Experience() {
                 className={`exp__dotBtn ${index === i ? "is-active" : ""}`}
                 aria-selected={index === i}
                 onClick={() => goTo(i)}
-                title={`Go to ${i + 1}`}
               />
             ))}
           </div>
@@ -300,7 +246,7 @@ export default function Experience() {
 
             <div className="exp__views" title="views">
               <img src={viewsIcon} alt="views" />
-              <span className="exp__viewsCount">{totalVisits ?? "—"}</span>
+              <span className="exp__viewsCount">{totalVisits ?? "417"}</span>
               {/* TODO: 전역 방문자 수 API 연동 */}
             </div>
 

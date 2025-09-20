@@ -1,9 +1,18 @@
+import { Typewriter } from "react-simple-typewriter";
 import { logoUSC, logoMSU } from "../../assets";
 
 export default function EducationSection() {
   return (
     <section className="education whoSec" id="education">
-      <h1 className="edu__title">Education</h1>
+      <h1 className="edu__title">
+        <Typewriter
+          words={["Education"]}
+          typeSpeed={50}
+          deleteSpeed={0}
+          delaySpeed={400}
+          cursor
+        />
+        </h1>
 
       {/* 화면을 100%로 덮는 컨테이너(풀블리드) */}
       <div className="edu__container">
