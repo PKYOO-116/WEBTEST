@@ -4,20 +4,20 @@
 
 .loader__bar{
   position: absolute;
-  top: 0;               /* 전체 화면 기준 */
-  left: 50%;            /* 화면 가로 중앙 */
-  transform: translateX(-50%);  /* 가로 중앙 정렬 */
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
   width: 2px;
-  height: 100vh;        /* ← 60vh → 100vh 로! */
-  transform-origin: 50% 50%;  /* ← 중심을 원점으로 */
+  height: 100vh;
+  transform-origin: 50% 50%;
   background: #fff;
   z-index: 3;
 }
 
 .loader__panelHalf {
   position: absolute; top: 0; bottom: 0; width: 50vw; background: #000;
-  z-index: 2;                 /* ⬅️ 패널은 선보다 아래 */
+  z-index: 2;
 }
-/* 처음엔 중앙을 덮고 있다가 밖(좌/우)으로 나감 */
+
 .loader__panelLeft  { left:  0; right: auto; }
 .loader__panelRight { right: 0; left:  auto; }

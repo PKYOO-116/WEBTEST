@@ -6,4 +6,8 @@
 @use "./components";
 @use "./pages";
 @use "./pages/sections";
-@use "./debug"
+@use "./debug";
+
+html, body {
+  font-family: $font-base;
+};

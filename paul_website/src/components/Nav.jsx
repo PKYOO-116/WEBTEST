@@ -10,7 +10,7 @@ export default function Nav() {
 
   return (
     <header className="nav">
-      <div className="nav__wrap container">
+      <div className="nav__wrap">
         <nav className="nav__list">
           {links.map((l) => (
             <NavLink

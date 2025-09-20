@@ -1,22 +1,55 @@
 @use "../foundation" as *;
 
 /* Desktop --------------------------------------------------------------------------------------------------------------------------------- */
-@media (min-width: 1025px) {
+@media (min-width: 1201px) {
   .whoPage{
-    height: 100svh;
+    height: 100dvh;
     overflow-y: auto;
   }
 
   .whoSec{
-    /* 섹션은 화면 꽉 차게 */
     min-height: 100dvh;
     height: 100dvh;
     display: grid;
   }
 }
 /* Tablet --------------------------------------------------------------------------------------------------------------------------------- */
-@media (min-width: 601px) and (max-width: 1024px) {
+@media (min-width: 601px) and (max-width: 1200px) {
+  .whoPage{
+    height: 100svh;
+    overflow-y: auto;
+    scroll-snap-type: y mandatory;  /* 스냅 켜기 */
+    scroll-behavior: smooth;
+    overscroll-behavior-y: contain; /* 부모로 스크롤 전파 방지 */
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-y;
+  }
+
+  .whoSec{
+    height: 100svh;
+    display: grid;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    box-sizing: border-box;
+  }
 }
 /* Mobile --------------------------------------------------------------------------------------------------------------------------------- */
 @media (max-width: 600px) {
+  .whoPage{
+    height: 100svh;
+    overflow-y: auto;
+    scroll-snap-type: y mandatory;  /* 스냅 켜기 */
+    scroll-behavior: smooth;
+    overscroll-behavior-y: contain; /* 부모로 스크롤 전파 방지 */
+    -webkit-overflow-scrolling: touch;
+    touch-action: pan-y;
+  }
+
+  .whoSec{
+    height: 100svh;
+    display: grid;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+    box-sizing: border-box;
+  }
 }

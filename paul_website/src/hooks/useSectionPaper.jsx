@@ -1,8 +1,8 @@
 import { useEffect, useRef } from "react";
 
 export default function useSectionPager(containerRef, sectionSelector = ".whoSec", {
-  duration = 700,   // 스크롤 애니메이션 체감 시간(ms)
-  threshold = 40,   // 휠/스와이프 민감도
+  duration = 1500,   // 스크롤 애니메이션 체감 시간(ms)
+  threshold = 60,   // 휠/스와이프 민감도
 } = {}) {
   const lockRef = useRef(false);
   const touchStartY = useRef(0);

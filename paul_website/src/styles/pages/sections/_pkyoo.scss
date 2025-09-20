@@ -1,5 +1,5 @@
 /* Desktop --------------------------------------------------------------------------------------------------------------------------------- */
-@media (min-width: 1025px) {
+@media (min-width: 1201px) {
   .pkyoo {
     height: 100dvh;
     display: flex;
@@ -16,7 +16,7 @@
   }
 }
 /* Tablet --------------------------------------------------------------------------------------------------------------------------------- */
-@media (min-width: 601px) and (max-width: 1024px) {
+@media (min-width: 601px) and (max-width: 1200px) {
   .pkyoo {
     height: 100svh;
     display: flex;
@@ -34,4 +34,18 @@
 }
 /* Mobile --------------------------------------------------------------------------------------------------------------------------------- */
 @media (max-width: 600px) {
+  .pkyoo {
+    height: 100svh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &__title {
+      margin: 0;
+      font: 900 clamp(15px, 7vw, 140px)/1.1 sans-serif;
+      text-align: center;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+    }
+  }
 }

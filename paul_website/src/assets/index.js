@@ -21,6 +21,8 @@ import logoExcello from "./logos/엑셀로_흰색기본로고.png";
 import logoKDB from "./logos/한국산업은행CI_가로조합_영문_그라데이션.png";
 import logoROKAF from "./logos/Republic_of_Korea_Air_Force_emblem.png";
 import logoSYPM from "./logos/SYPM.png";
+import viewsIcon from "./logos/views.jpeg"
+import heartIcon from "./logos/heart.png"
 
 // Leadership logos & photos
 import logoAAII from "./logos/AAII_Logo-White.svg";
@@ -52,6 +54,8 @@ export {
   logoFPM,
   logoExcello,
   logoKDB,
+  viewsIcon,
+  heartIcon,
   logoROKAF,
   logoSYPM,
   logoAAII,

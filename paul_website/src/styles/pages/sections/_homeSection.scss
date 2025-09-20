@@ -1,7 +1,7 @@
 @use "../../foundation" as *;
 
 /* Desktop --------------------------------------------------------------------------------------------------------------------------------- */
-@media (min-width: 1025px) {
+@media (min-width: 1201px) {
   .home__grid{
     display: grid;
     grid-template-columns: 40% 1fr;
@@ -79,10 +79,10 @@
 }
 
 /* Tablet --------------------------------------------------------------------------------------------------------------------------------- */
-@media (min-width: 601px) and (max-width: 1024px) {
+@media (min-width: 601px) and (max-width: 1200px) {
   html, body { height: auto; }
   body { overflow: auto; }    
-
+  
   .home__grid{
     padding-top: 40px;
     grid-template-columns: 1fr;
