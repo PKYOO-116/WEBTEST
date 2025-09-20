@@ -18,3 +18,18 @@
   gap: clamp(20px, 3vw, 40px);
   @media (min-width: $bp-md) { grid-template-columns: 1fr 1.2fr; }
 }
+
+@mixin respond-to($breakpoint) {
+  @if $breakpoint == mobile {
+    @media (max-width: $breakpoint-mobile) { @content; }
+  }
+  @else if $breakpoint == tablet {
+    @media (min-width: $breakpoint-mobile + 1) and (max-width: $breakpoint-tablet - 1) { @content; }
+  }
+  @else if $breakpoint == desktop {
+    @media (min-width: $breakpoint-tablet) and (max-width: $breakpoint-desktop - 1) { @content; }
+  }
+  @else if $breakpoint == large-desktop {
+    @media (min-width: $breakpoint-desktop) { @content; }
+  }
+}

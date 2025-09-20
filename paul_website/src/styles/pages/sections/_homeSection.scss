@@ -1,7 +1,7 @@
 @use "../../foundation" as f;
 
 // /* Desktop --------------------------------------------------------------------------------------------------------------------------------- */
-// @media (min-width: 1201px) {
+@media (min-width: 1201px) {
   .home__grid{
     display: grid;
     grid-template-columns: 40% 1fr;
@@ -76,135 +76,135 @@
   .home__contacts a:hover{
     text-decoration: underline;
   }
-// }
+}
 
-// /* Tablet --------------------------------------------------------------------------------------------------------------------------------- */
-// @media (min-width: 601px) and (max-width: 1200px) {
-//   html, body { height: auto; }
-//   body { overflow: auto; }    
+/* Tablet --------------------------------------------------------------------------------------------------------------------------------- */
+@media (min-width: 601px) and (max-width: 1200px) {
+  html, body { height: auto; }
+  body { overflow: auto; }    
   
-//   .home__grid{
-//     padding-top: 40px;
-//     grid-template-columns: 1fr;
-//     align-items: start;
-//   }
-//   .home__photo{
-//     width: clamp(200px, 25vw, 300px);
-//     margin: 0 auto;
-//   }
-//   .home__right{
-//     display: flex;
-//     flex-direction: column;
-//     align-items: center;
-//     text-align: center;
-//   }
-//   .home__title   { 
-//     margin: 15px 0;
-//     font: 800 clamp(80px, 4.5vw, 120px) f.$font-base;
-//   }
-//   .home__subtitle{
-//     margin:0;
-//     font:600 clamp(50px, 2.5vw, 90px) f.$font-base;
-//   }
-//   .home__tagline {
-//     margin:6px 0;
-//     font:500 clamp(30px, 1.85vw, 60px) f.$font-base;
-//   }
-//   .home__roles{
-//     display: flex;
-//     list-style: none;
-//     gap: 0 45px;
-//     align-items: center;
-//     font: 300 clamp(18px, 1.7vw, 30px) f.$font-base;
-//   }
-//   .home__contacts {
-//     display: flex;
-//     position: static;
-//     margin: 30px;
-//     justify-content: right;
-//     flex-wrap: wrap;
-//     gap: 10px 30px;
+  .home__grid{
+    padding-top: 40px;
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+  .home__photo{
+    width: clamp(200px, 25vw, 300px);
+    margin: 0 auto;
+  }
+  .home__right{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .home__title   { 
+    margin: 15px 0;
+    font: 800 clamp(80px, 4.5vw, 120px) f.$font-base;
+  }
+  .home__subtitle{
+    margin:0;
+    font:600 clamp(50px, 2.5vw, 90px) f.$font-base;
+  }
+  .home__tagline {
+    margin:6px 0;
+    font:500 clamp(30px, 1.85vw, 60px) f.$font-base;
+  }
+  .home__roles{
+    display: flex;
+    list-style: none;
+    gap: 0 45px;
+    align-items: center;
+    font: 300 clamp(18px, 1.7vw, 30px) f.$font-base;
+  }
+  .home__contacts {
+    display: flex;
+    position: static;
+    margin: 30px;
+    justify-content: right;
+    flex-wrap: wrap;
+    gap: 10px 30px;
     
-//   }
-//   .home__contacts ul{
-//     list-style: none;
-//     display: grid;
-//     row-gap: 8px;
-//     min-width: 220px;
-//   }
-//   .home__contacts li {
-//     display: flex;
-//     align-items: center;
-//     gap: 12px;
-//   }
-//   .home__contacts img {
-//     width: 20px;
-//     height: 20px;
-//   }
-// }
+  }
+  .home__contacts ul{
+    list-style: none;
+    display: grid;
+    row-gap: 8px;
+    min-width: 220px;
+  }
+  .home__contacts li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .home__contacts img {
+    width: 20px;
+    height: 20px;
+  }
+}
 
-// /* Mobile --------------------------------------------------------------------------------------------------------------------------------- */
-// @media (max-width: 600px) {
-//   html, body { height: auto; }
-//   body { overflow: auto; }    
+/* Mobile --------------------------------------------------------------------------------------------------------------------------------- */
+@media (max-width: 600px) {
+  html, body { height: auto; }
+  body { overflow: auto; }    
 
-//   .home__grid{
-//     padding-top: 40px;
-//     grid-template-columns: 1fr;
-//     align-items: start;
-//   }
-//   .home__photo{
-//     width: clamp(200px, 25vw, 300px);
-//     margin: 0 auto;
-//   }
-//   .home__right{
-//     display: flex;
-//     flex-direction: column;
-//     align-items: center;
-//     text-align: center;
-//   }
-//   .home__title   { 
-//     margin: 15px 0;
-//     font: 800 clamp(30px, 8vw, 48px) f.$font-base;
-//   }
-//   .home__subtitle{
-//     margin:0;
-//     font:600 clamp(20px, 6.5vw, 30px) f.$font-base;
-//   }
-//   .home__tagline {
-//     margin:6px 0;
-//     font:500 clamp(18px, 5.5vw, 25px) f.$font-base;
-//   }
-//   .home__roles{
-//     display: flex;
-//     list-style: none;
-//     gap: 0 px;
-//     padding-right: 20px;
-//     align-items: center;
-//     font: 300 clamp(15px, 4vw, 20px) f.$font-base;
-//   }
-//   .home__contacts {
-//     display: flex;
-//     position: static;
-//     margin: 30px;
-//     justify-content: right;
-//     flex-wrap: wrap;
-//     gap: 10px 30px;
+  .home__grid{
+    padding-top: 40px;
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+  .home__photo{
+    width: clamp(200px, 25vw, 300px);
+    margin: 0 auto;
+  }
+  .home__right{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .home__title   { 
+    margin: 15px 0;
+    font: 800 clamp(30px, 8vw, 48px) f.$font-base;
+  }
+  .home__subtitle{
+    margin:0;
+    font:600 clamp(20px, 6.5vw, 30px) f.$font-base;
+  }
+  .home__tagline {
+    margin:6px 0;
+    font:500 clamp(18px, 5.5vw, 25px) f.$font-base;
+  }
+  .home__roles{
+    display: flex;
+    list-style: none;
+    gap: 0 px;
+    padding-right: 20px;
+    align-items: center;
+    font: 300 clamp(15px, 4vw, 20px) f.$font-base;
+  }
+  .home__contacts {
+    display: flex;
+    position: static;
+    margin: 30px;
+    justify-content: right;
+    flex-wrap: wrap;
+    gap: 10px 30px;
     
-//   }
-//   .home__contacts ul{
-//     list-style: none;
-//     display: grid;
-//     row-gap: 8px;
-//     min-width: 220px;
-//   }
-//   .home__contacts li {
-//     display: flex;
-//     align-items: center;
-//     gap: 12px;
-//   }
-//   .home__contacts img {
-//     width: 20px;
-//     height: 20px;
-//   }
-// }
+  }
+  .home__contacts ul{
+    list-style: none;
+    display: grid;
+    row-gap: 8px;
+    min-width: 220px;
+  }
+  .home__contacts li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .home__contacts img {
+    width: 20px;
+    height: 20px;
+  }
+}

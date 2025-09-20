@@ -16,6 +16,11 @@ $font-base: 'Archivo', 'Open Sans', sans-serif;
 // $font-l4: ;
 
 
-// Layout...?
+// Layout (Screen Size)
 $container-max: 1200px;
 $gutter: 24px;
+
+$breakpoint-mobile: 600px;
+$breakpoint-tablet: 1024px;
+$breakpoint-desktop: 1440px;
+$breakpoint-large-desktop: 1920px;

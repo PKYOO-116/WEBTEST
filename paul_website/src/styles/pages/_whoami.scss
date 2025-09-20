@@ -10,8 +10,7 @@
   -webkit-overflow-scrolling: touch;
   touch-action: pan-y;
 
-  /* ✅ scroll-snap-type 제거 */
-  scroll-behavior: smooth; /* 자연 스크롤만 */
+  scroll-behavior: smooth;
 }
 
 .whoSec {
