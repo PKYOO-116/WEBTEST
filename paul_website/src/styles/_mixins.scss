@@ -6,8 +6,8 @@
 }
 
 section {
-  width: 100svw;
-  height: 100svh;
+  width: auto;
+  height: auto;
 }
 
 @mixin respond-to($breakpoint) {

@@ -5,13 +5,3 @@
 .container { 
   @include container; 
 }
-
-/* 1. 부모(.homePage)의 높이를 메뉴바 제외한 전체 높이로 설정 */
-.homePage {
-  height: calc(100svh - var(--nav-h));
-}
-
-/* 2. 자식(.homeSec)은 부모의 높이를 그대로 100% 물려받도록 설정 */
-.homeSec {
-  height: 100%;
-}
