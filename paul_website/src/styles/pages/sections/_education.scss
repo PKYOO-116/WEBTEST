@@ -1,8 +1,225 @@
 @use "../../foundation" as f;
+
 /* Mobile --------------------------------------------------------------------------------------------------------------------------------- */
+.education {
+  .container {
+    display: grid;
+    grid-template-columns: auto auto 1fr;
+    grid-template-rows: 25% auto auto;
+
+    .grid-1 {
+      grid-column: 1 / 4;
+      grid-row: 1 / 2;
+      display: flex;
+      align-items: end;
+      justify-content: center;
+
+      .edu__title {
+        font:800 35px f.$font-base;
+        margin-bottom: 30px;
+      }
+    }
+
+    .grid-4 {
+      grid-column: 1 / 4;
+      grid-row: 2 / 3;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .edu__stage {
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+        align-items: flex-start;
+
+        .edu__item {
+          .edu__school {
+            font: 600 18px f.$font-base;
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 10px;
+
+            .edu__locaTime {
+              font-size: 14px;
+              font-weight: 100;
+              display: flex;
+              flex-direction: column;
+              margin-top: 5px;
+            }
+          }
+        }
+
+        .edu__body {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+
+          .edu__logo {
+            margin: 5px 0 0 0;
+            width: 72px;
+            height: 72px;
+            object-fit: contain;
+            background: f.$white;
+            border-radius: 8px;
+            padding: 3px;
+          }
+          
+          .edu__degree {
+            font-size: 14px;
+          }
+          .edu__major {
+            font: 700 18px f.$font-base;
+          }
+          .edu__minor {
+            font-size: 14px;
+          }
+        }
+      }
+    }
+  }
+}
+
 /* Tablet --------------------------------------------------------------------------------------------------------------------------------- */
-@include f.respond-to(tablet) {}
+@include f.respond-to(tablet) {
+  .education {
+    .container {
+      grid-template-rows: 20% auto 1fr;
+
+      .grid-1 {
+        .edu__title {
+          font-size: 45px;
+        }
+      }
+
+      .grid-4 {
+        .edu__stage {
+          .edu__item {
+            .edu__school {
+              font-size: 24px;
+
+              .edu__locaTime {
+                font-size: 18px;
+              }
+            }
+          }
+
+          .edu__body {
+            gap: 12px;
+
+            .edu__logo {
+              width: 88px;
+              height: 88px;
+            }
+            .edu__degree {
+              font-size: 22px;
+            }
+            .edu__major {
+              font-size: 28px;
+            }
+            .edu__minor {
+              font-size: 16px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
 /* Desktop --------------------------------------------------------------------------------------------------------------------------------- */
-@include f.respond-to(desktop) {}
+@include f.respond-to(desktop) {
+  .education {
+    .container {
+      .grid-1 {
+        .edu__title {
+          font-size: 70px;
+        }
+      }
+
+      .grid-4 {
+        .edu__stage {          
+          .edu__item {
+            .edu__school {
+              font-size: 35px;
+
+              .edu__locaTime {
+                font-size: 25px;
+              }
+            }
+          }
+
+          .edu__body {
+            gap: 18px;
+
+            .edu__logo {
+              width: 108px;
+              height: 108px;
+            }
+            .edu__degree {
+              font-size: 30px;
+            }
+            .edu__major {
+              font-size: 35px;
+            }
+            .edu__minor {
+              font-size: 22px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
 /* LargeDesktop --------------------------------------------------------------------------------------------------------------------------------- */
-@include f.respond-to(large-desktop) {}
+@include f.respond-to(large-desktop) {
+  .education {
+    .container {
+      .grid-1 {
+        align-items: center;
+
+        .edu__title {
+          font-size: clamp(70px, 4.5vw, 250px);
+          margin: 0;
+        }
+      }
+
+      .grid-4 {
+        .edu__stage {
+          gap: clamp(30px, 5vh, 80px);
+          .edu__item {
+            .edu__school {
+              font-size: clamp(35px, 1.8vw, 90px);
+              margin-bottom: clamp(10px, 1vw, 50px);
+
+              .edu__locaTime {
+                font-size: clamp(25px, 1.3vw, 70px);
+                margin-top: clamp(8px, 0.4vw, 20px);
+              }
+            }
+          }
+
+          .edu__body {
+            gap: clamp(18px, 0.9vw, 35px);
+
+            .edu__logo {
+              width: clamp(108px, 5.6vw, 240px);
+              height: clamp(108px, 5.6vw, 240px);
+            }
+            .edu__degree {
+              font-size: clamp(30px, 1.5vw, 70px);
+            }
+            .edu__major {
+              font-size: clamp(35px, 1.8vw, 90px);
+              margin-top: clamp(3px, 0.1vw, 20px)
+            }
+            .edu__minor {
+              font-size: clamp(22px, 1.1vw, 55px);
+            }
+          }
+        }
+      }
+    }
+  }
+}
