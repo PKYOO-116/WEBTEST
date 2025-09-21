@@ -1,201 +1,135 @@
 @use "../foundation" as f;
 
-/* Desktop --------------------------------------------------------------------------------------------------------------------------------- */
-@media (min-width: 1201px) {
-  :root { --nav-h: 72px; }
+/* Base (Mobile First) ------------------------------------------------------------------------------------------------*/
+:root {
+  --nav-h: 48px;
+}
 
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    height: var(--nav-h);
-    z-index: 1000;
+nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--nav-h);
+  z-index: 1000;
+  border-bottom: 1px solid f.$border;
+  background: rgba(f.$black, 0.9);
 
-    padding-left: clamp(12px, 8vw, 200px);
-    border-bottom: 1px solid f.$border;
-    background: rgba(0, 0, 0, 0.9);
-    font-family: f.$font-base;
+  mask-image: linear-gradient(
+    to right,
+    transparent 0,
+    f.$black 24px,
+    f.$black calc(100% - 24px),
+    transparent 100%
+  );
+  font-family: f.$font-base; // 통일 적용
+}
 
-    mask-image: linear-gradient(
-      to right,
-      transparent 0,
-      black 24px,
-      black calc(100% - 24px),
-      transparent 100%
-    );
-  }
-  .nav__list {
-    display: flex;
-    gap: 30px;
-    align-items: center;
-    justify-content: flex-start;
-    overflow-x: auto;
-    overflow-y: hidden;
-    white-space: nowrap;
-    -webkit-overflow-scrolling: touch;
+.nav__list {
+  display: flex;
+  gap: 20px;
+  padding-left: 10svw;
+  align-items: center;
+  justify-content: flex-start;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  white-space: nowrap;
+}
+.nav__list::-webkit-scrollbar {
+  display: none;
+}
 
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-  }
-  .nav__list::-webkit-scrollbar { display: none; }
+.nav__item {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 12px;
+  border-radius: 10px;
+  color: rgba(f.$white, 0.9);
+  text-decoration: none;
+  transition: background 0.2s ease;
+  font: 700 14px f.$font-base;
+  white-space: nowrap;
+  flex: 0 0 auto;
 
-  .nav__item {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    padding: 8px 12px;
-    border-radius: 10px;
-    color: rgba(255,255,255,.9);
-    text-decoration: none;
-    transition: background .2s ease;
-    font-weight: 700;
-    font-size: clamp(13px, 1vw, 24px);
-    white-space: nowrap;
-    flex: 0 0 auto;
-
-    &:hover { background: #111; }
-  }
-
-  .nav__item--active { background: #111; }
-
-  .nav__item--active::after {
-    content: "";
-    position: absolute;
-    left: 8px; right: 8px;
-    bottom: -6px;                     /* 필요하면 -4 ~ -8 사이로 조절 */
-    height: 2px;
-    background: #fff;
-    border-radius: 2px;
+  &:hover {
+    background: #111;
   }
 }
-/* Tablet --------------------------------------------------------------------------------------------------------------------------------- */
-@media (min-width: 601px) and (max-width: 1200px) {
-  :root { --nav-h: 56px; }
 
-  nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    height: var(--nav-h);
-    z-index: 1000;
+.nav__item--active {
+  background: #111;
+}
 
-    padding-left: clamp(12px, 8vw, 200px);
-    border-bottom: 1px solid f.$border;
-    background: rgba(0, 0, 0, 0.9);
+.nav__item--active::after {
+  content: "";
+  position: absolute;
+  left: 8px;
+  right: 8px;
+  bottom: -4px;
+  height: 2px;
+  background: f.$white;
+  border-radius: 2px;
+}
 
-    mask-image: linear-gradient(
-      to right,
-      transparent 0,
-      black 24px,
-      black calc(100% - 24px),
-      transparent 100%
-    );
+/* Tablet ------------------------------------------------------------------------------------------------*/
+@include f.respond-to(tablet) {
+  :root {
+    --nav-h: 56px !important;
   }
+
   .nav__list {
-    display: flex;
-    gap: 20px;
-    align-items: center;
-    justify-content: flex-start;
-    overflow-x: auto;
-    overflow-y: hidden;
-    white-space: nowrap;
-    -webkit-overflow-scrolling: touch;
-
-    scrollbar-width: none;
-    -ms-overflow-style: none;
+    gap: 25px;
   }
-  .nav__list::-webkit-scrollbar { display: none; }
 
   .nav__item {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    padding: 6px 8px;
-    border-radius: 10px;
-    color: rgba(255,255,255,.9);
-    text-decoration: none;
-    transition: background .2s ease;
-    font-weight: 700;
-    font-size: clamp(13px, 1.4vw, 20px);
-    white-space: nowrap;
-    flex: 0 0 auto;
-
-    &:hover { background: #111; }
+    padding: 8px 15px;
+    font-size: 16px;
   }
 
-  .nav__item--active { background: #111; }
-
   .nav__item--active::after {
-    content: "";
-    position: absolute;
-    left: 8px; right: 8px;
     bottom: -6px;
-    height: 2px;
-    background: #fff;
-    border-radius: 2px;
   }
 }
-/* Mobile --------------------------------------------------------------------------------------------------------------------------------- */
-@media (max-width: 600px) {
-  :root { --nav-h: 48px; }
+
+/* Desktop ------------------------------------------------------------------------------------------------*/
+@include f.respond-to(desktop) {
+  :root {
+    --nav-h: 60px !important;
+  }
 
   nav {
-    position: fixed;
-    top: 0; left: 0; right: 0;
-    height: var(--nav-h);
-    z-index: 1000;
-
-    padding: 0 20px;
-    border-bottom: 1px solid f.$border;
-    background: rgba(0, 0, 0, 0.9);
-
-    mask-image: linear-gradient(
-      to right,
-      transparent 0,
-      black 24px,
-      black calc(100% - 24px),
-      transparent 100%
-    );
+    padding-left: clamp(12px, 8vw, 200px);
+    padding-right: 0;
   }
+
   .nav__list {
-    display: flex;
-    gap: 12px;
-    align-items: center;
-    justify-content: flex-start;
-    overflow-x: auto;
-    overflow-y: hidden;
-    white-space: nowrap;
-    -webkit-overflow-scrolling: touch;
-
-    scrollbar-width: none;
-    -ms-overflow-style: none;
+    gap: 30px;
   }
-  .nav__list::-webkit-scrollbar { display: none; }
 
   .nav__item {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    padding: 3px 6px;
-    border-radius: 10px;
-    color: rgba(255,255,255,.9);
-    text-decoration: none;
-    transition: background .2s ease;
-    font-weight: 700;
-    font-size: clamp(13px, 1.4vw, 20px);
-    white-space: nowrap;
-    flex: 0 0 auto;
+    padding: 8px 12px;
+    font-size: 18px;
+  }
+}
 
-    &:hover { background: #111; }
+/* LargeDesktop ------------------------------------------------------------------------------------------------*/
+@include f.respond-to(large-desktop) {
+  :root {
+    --nav-h: clamp(72px, 6.6vh, 108px) !important;
   }
 
-  .nav__item--active { background: #111; }
+  nav {
+    padding-left: clamp(12px, 8vw, 200px);
+    padding-right: 0;
+  }
 
-  .nav__item--active::after {
-    content: "";
-    position: absolute;
-    left: 8px; right: 8px;
-    bottom: -4px;
-    height: 2px;
-    background: #fff;
-    border-radius: 2px;
+  .nav__list {
+    gap: clamp(30px, 2vw, 60px);
+  }
+
+  .nav__item {
+    padding: clamp(8px, 0.7vh, 16px) clamp(12px, 1.1vh, 24px);
+    font-size: clamp(18px, 1.2vw, 40px);
   }
 }
