@@ -1,5 +1,214 @@
 @use "../../foundation" as f;
 
+/* Mobile ------------------------------------------------------------------ */
+
+
+.exp__title {
+  height: clamp(40px, 3vw, 80px);
+  font:800 clamp(40px, 3vw, 80px) f.$font-base;
+  margin: 50px 0 20px 50px;
+  text-align: left;
+}
+
+/* 가운데 컬럼 */
+.exp__column {
+  width: 90%;
+  max-width: 60%;
+  margin: 0 0 0 80px;
+  position: relative;
+}
+
+/* 오른쪽 로고 — 섹션 기준 absolute (다른 섹션 노출 X) */
+.exp__sideBrand {
+  position: absolute;                /* fixed 아님 */
+  right: clamp(16px, 2vw, 28px);
+  top: 50%;
+  transform: translateY(-50%);       /* 세로 중앙 */
+  pointer-events: none;
+}
+.exp__sideBrandImg {
+  display: block;
+  transform: rotate(90deg);
+  width: min(25vw, 1080px);
+  max-width: calc(100% - 16px);      /* 섹션 우측 경계 보호 */
+  height: auto;
+}
+
+.exp__viewport {
+  position: relative;
+  overflow: hidden;                   /* 카드 외부 클리핑 */
+  border-radius: 20px;
+  background: rgba(f.$white, 0.03);
+  border: 0;                          /* 얇은 라인 오인 방지 */
+  min-height: clamp(100px, 60vh, 300px);
+  box-shadow: none;
+}
+.exp__track {
+  display: flex;
+  will-change: transform;
+  transition: transform 400ms ease;
+  min-height: 100%;
+}
+.exp__slide {
+  min-width: 100%;
+  padding: 40px;
+  min-height: 100%;
+  display: grid;
+  gap: 16px;
+  align-content: start;
+}
+
+/* 카드 내부 */
+.exp__slideHeader { display: grid; }
+.exp__heading { display: grid; gap: 10px; }
+.exp__badge { 
+  display: flex; flex-wrap: wrap;
+  gap: 15px;
+  font-weight: 800; font-size: 32px; }
+.exp__meta { display: flex; gap: 10px; font-size: 20px; }
+.exp__dot { opacity: 0.6; }
+
+.exp__bullets { 
+  margin: 20px;
+  padding-left: 18px;
+  display: grid;
+  gap: 15px;
+  font:400 24px f.$font-base;
+}
+
+.exp__footer { display: grid; gap: 25px; }
+.exp__kpis {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 8px;
+}
+.exp__kpi {
+  background-color: f.$exp-kpi;
+  border-radius: 12px;
+  padding: 10px 15px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.exp__kpiLabel { font-weight: 500; font-size: 18px; }
+.exp__kpiValue { font-weight: 1000; font-size: 18px; }
+
+.exp__tech {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.exp__chip {
+  background: f.$exp-kpi;
+  color: f.$white;
+  border-radius: 999px;
+  padding: 10px 14px;
+  font-size: 18px;
+}
+
+/* 검색 (뷰포트 바깥 우상단) */
+.exp__searchRow { display: flex; justify-content: flex-end; margin: 0 16px 10px 0; }
+.exp__search { position: static; display: flex; gap: 6px; z-index: 1; }
+.exp__search input[type="search"] {
+  background: rgba(f.$white, 0.08);
+  border: 1px solid rgba(f.$white, 0.12);
+  color: f.$white;
+  padding: 6px 10px;
+  border-radius: 10px;
+  width: clamp(160px, 20vw, 240px);
+  max-width: 100%;
+  outline: none;
+}
+.exp__search input[type="search"]:focus { outline: 2px solid rgba(f.$white, 0.45); }
+.exp__search button {
+  border: 1px solid rgba(f.$white, 0.12);
+  background: transparent;
+  color: f.$white;
+  padding: 6px 10px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+/* Viewport 아래 바: dots(중앙) + actions(우측) 같은 줄 */
+.exp__viewportBar {
+  display: flex;
+  align-items: center;        /* 같은 높이에 */
+  justify-content: center;    /* dots 중앙 */
+  gap: 12px;
+  margin-top: 18px;
+  min-height: 40px;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  background: transparent;
+  border: 0;
+  box-shadow: none;
+}
+
+/* 전역 nav 보더가 dot에 먹지 않게 응급 오버라이드(B안) */
+.experience .exp__viewportBar .exp__dots {
+  border: 0 !important;
+  box-shadow: none !important;
+  background: transparent !important;
+}
+
+/* dots */
+.exp__dots {
+  display: flex;
+  gap: 10px;
+}
+.exp__dotBtn {
+  width: 20px; height: 20px; border-radius: 999px;
+  border: none; background: rgba(f.$white, 0.24);
+  cursor: pointer; outline: none; box-shadow: none;
+}
+.exp__dotBtn.is-active { background: rgba(f.$white, 0.92); transform: scale(1.08); }
+
+/* actions: 오른쪽 끝으로 */
+.exp__actions {
+  margin-left: 65%;
+  display: flex; align-items: center; gap: 12px;
+}
+.exp__websiteBtn {
+  border: 2px solid rgba(f.$white, 0.12);
+  background: transparent;
+  color: f.$white;
+  padding: 10px 20px;
+  border-radius: 30px;
+  font:400 20px f.$font-base;
+  cursor: pointer;
+}
+.exp__views { 
+  display: inline-flex; 
+  align-items: center;
+  gap: 6px;
+  font-weight: 700;
+  font-size: 18px;
+}
+.exp__views img {
+  width: 36px; height: 36px;
+}
+
+.exp__heartBtn {
+  width: 36px; height: 36px;
+  border-radius: 30px;
+  display: grid; place-items: center;
+  border: 1.5px solid rgba(f.$white, 0.12);
+  background: transparent;
+  cursor: pointer;
+}
+.exp__heartBtn img { width: 30px; height: 20px; }
+.exp__heartBtn.is-liked { background: rgba(235, 41, 90, 0.18); }
+/* Tablet --------------------------------------------------------------------------------------------------------------------------------- */
+@include f.respond-to(tablet) {}
+/* Desktop --------------------------------------------------------------------------------------------------------------------------------- */
+@include f.respond-to(desktop) {}
+/* LargeDesktop --------------------------------------------------------------------------------------------------------------------------------- */
+@include f.respond-to(large-desktop) {}
+
 /* Desktop(UHD~ ) --------------------------------------------------------------------------------------------------------------------------------- */
 @media (min-width: 1400px) {
   .experience {

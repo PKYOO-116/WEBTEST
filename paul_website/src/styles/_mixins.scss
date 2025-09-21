@@ -3,7 +3,6 @@
 @mixin container {
   width: 100%;
   height: calc(100svh - var(--nav-h));
-  margin-top: var(--nav-h);
 }
 
 section {

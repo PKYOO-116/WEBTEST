@@ -1,12 +1,6 @@
 @use "../foundation" as *;
 
 .whoPage {
-  height: 100vh;
-  height: 100svh;
-  @supports (height: 100dvh) { height: 100dvh; }
-
-  overflow-y: auto;
-  overflow-x: clip;
   -webkit-overflow-scrolling: touch;
   touch-action: pan-y;
 
@@ -14,14 +8,5 @@
 }
 
 .whoSec {
-  min-height: 100vh;
-  min-height: 100svh;
-  @supports (min-height: 100dvh) { min-height: 100dvh; }
-
-  display: grid;
-  grid-template-rows: auto 1fr auto;
-  box-sizing: border-box;
-  overflow: hidden;
-
   border-top: 1pt solid $material;
 }
