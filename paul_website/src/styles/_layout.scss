@@ -6,9 +6,12 @@
   @include container; 
 }
 
-.section {
-  scroll-margin-top: var(--nav-h);
+/* 1. 부모(.homePage)의 높이를 메뉴바 제외한 전체 높이로 설정 */
+.homePage {
+  height: calc(100svh - var(--nav-h));
+}
 
-  &__title   { font-size: clamp(24px, 3.2vw, 32px); font-weight: 700; }
-  &__subtitle{ margin-top: 6px; color: $text-muted; font-size: 14px; }
+/* 2. 자식(.homeSec)은 부모의 높이를 그대로 100% 물려받도록 설정 */
+.homeSec {
+  height: 100%;
 }
