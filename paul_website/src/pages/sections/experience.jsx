@@ -134,13 +134,6 @@ export default function Experience() {
         <div className="grid grid-2"></div>
         <div className="grid grid-3"></div>
         <div className="grid grid-4">
-          <div className="exp__sideBrand" aria-hidden="true">
-          {items[index]?.logo && (
-            <img src={items[index].logo} alt="" className="exp__sideBrandImg" />
-          )}
-          </div>
-
-          <div className="exp__column">
           <div className="exp__searchRow">
             <form className="exp__search" onSubmit={onSearch} role="search">
               <input
@@ -155,8 +148,7 @@ export default function Experience() {
           </div>
 
           {/* Viewport (카드 1장씩) */}
-          <div
-            className="exp__viewport"
+          <div className="exp__viewport"
             ref={trackRef}
             onTouchStart={onTouchStart}
             onTouchMove={onTouchMove}
@@ -219,6 +211,11 @@ export default function Experience() {
                       )}
                     </footer>
                   )}
+                  <div className="exp__sideBrand mobile">
+                    {items[index]?.logo && (
+                      <img src={items[index].logo} alt="" className="exp__sideBrandImg" />
+                    )}
+                  </div>
                 </article>
               ))}
             </div>
@@ -240,15 +237,6 @@ export default function Experience() {
             </div>
 
             <div className="exp__actions">
-              <button
-                className="exp__websiteBtn"
-                onClick={() => openWebsite(items[index]?.website)}
-                type="button"
-                title="Open company website"
-              >
-                Website
-              </button>
-
               <div className="exp__views" title="views">
                 <img src={viewsIcon} alt="views" />
                 <span className="exp__viewsCount">{totalVisits ?? "417"}</span>
@@ -266,10 +254,15 @@ export default function Experience() {
               </button>
             </div>
           </div>
-          </div>
         </div>
         <div className="grid grid-5"></div>
-        <div className="grid grid-6"></div>
+        <div className="grid grid-6">
+          <div className="exp__sideBrand tablet desktop">
+            {items[index]?.logo && (
+              <img src={items[index].logo} alt="" className="exp__sideBrandImg" />
+            )}
+          </div>
+        </div>
         <div className="grid grid-7"></div>
         <div className="grid grid-8"></div>
         <div className="grid grid-9"></div>
