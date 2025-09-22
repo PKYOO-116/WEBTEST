@@ -1,81 +1,82 @@
-// /* 모든 공통 섹션 */
-// section {
-//   border: 2px dashed red;
+/* 모든 공통 섹션 */
+section {
+  border: 2px dashed red;
+}
+.container {
+  border: 2px solid skyblue;
+}
+.grid {
+  border: 2px dashed orange;
+}
+
+/* MenuBar */
+// .nav {
+//   border: 2px dashed yellow;
 // }
-// .container {
-//   border: 2px solid skyblue;
+// .nav__list {
+//   border: 2px solid purple;
 // }
-// .grid {
-//   border: 2px dashed orange;
+// .nav__item {
+//   border: 2px dashed green;
 // }
 
-// /* MenuBar */
-// // .nav {
-// //   border: 2px dashed yellow;
-// // }
-// // .nav__list {
-// //   border: 2px solid purple;
-// // }
-// // .nav__item {
-// //   border: 2px dashed green;
-// // }
+/* Home */
+// .home__grid {
+//   border: 2px solid greenyellow;
+// }
+// .home__left {
+//   border: 2px solid orange;
+// }
+// .home__right {
+//   border: 2px solid green;
+// }
+// .home__contacts {
+//   border: 2px solid green;
 
-// /* Home */
-// // .home__grid {
-// //   border: 2px solid greenyellow;
-// // }
-// // .home__left {
-// //   border: 2px solid orange;
-// // }
-// // .home__right {
-// //   border: 2px solid green;
-// // }
-// // .home__contacts {
-// //   border: 2px solid green;
+//   ul {
+//     border: 2px solid green;
+//   }
+//   li {
+//     border: 2px solid green;
+//   }
+// }
 
-// //   ul {
-// //     border: 2px solid green;
-// //   }
-// //   li {
-// //     border: 2px solid green;
-// //   }
-// // }
+/* Who Am I */
+  /* Sections */
+// .pkyoo {
+//   border: 2px solid blue;
+// }
+// .education {
+//   border: 2px solid rgb(186, 186, 186);
+// }
+// .experience {
+//   border: 2px solid rgb(34, 0, 255);
+// }
+// .community {
+//   border: 2px solid purple;
+// }
+// .skills {
+//   border: 2px solid cyan;
+// }
 
-// /* Who Am I */
-//   /* Sections */
-// // .pkyoo {
-// //   border: 2px solid blue;
-// // }
-// // .education {
-// //   border: 2px solid rgb(186, 186, 186);
-// // }
-// // .experience {
-// //   border: 2px solid rgb(34, 0, 255);
-// // }
-// // .community {
-// //   border: 2px solid purple;
-// // }
-// // .skills {
-// //   border: 2px solid cyan;
-// // }
-
-//   /* Education */
+  /* Education */
 // .edu__stage {
 //   border: 2px solid cyan;
 // }
 // .edu__item {
 //   border: 2px solid saddlebrown;
 // }
-//   /* Experience */
-// /* Viewport 박스 */
-// // .exp__viewport {
-// //   border: 2px solid rgb(255, 0, 0);
-// // }
 
-// // .exp__column {
-// //   border: 2px solid rgb(96, 223, 234);
-// // }
+  /* Experience */
+/* Viewport 박스 */
+// .exp__viewport {
+//   border: 2px solid rgb(255, 0, 0);
+// }
 
-// // .exp__sideBrand {
-// //   border: 2px solid rgb(96, 223, 234);
-// // }
+// .exp__column {
+//   border: 2px solid rgb(96, 223, 234);
+// }
+
+// .exp__sideBrand {
+//   border: 2px solid rgb(96, 223, 234);
+// }

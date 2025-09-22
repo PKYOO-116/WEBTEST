@@ -118,149 +118,161 @@ export default function Experience() {
   };
 
   return (
-    <section id="experience" className="experience whoSec" aria-label="Experience section">
-      <h1 className="exp__title">
-        <Typewriter
-          words={["Experience"]}
-          typeSpeed={50}
-          deleteSpeed={0}
-          delaySpeed={400}
-          cursor
-        />
-      </h1>
-
-      <div className="exp__sideBrand" aria-hidden="true">
-        {items[index]?.logo && (
-          <img src={items[index].logo} alt="" className="exp__sideBrandImg" />
-        )}
-      </div>
-
-      <div className="exp__column">
-        <div className="exp__searchRow">
-          <form className="exp__search" onSubmit={onSearch} role="search">
-            <input
-              type="search"
-              placeholder="Search Keywords"
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              aria-label="Search experiences"
+    <section id="experience" className="experience whoSec">
+      <div className="container">
+        <div className="grid grid-1">
+          <h1 className="exp__title">
+            <Typewriter
+              words={["Experience"]}
+              typeSpeed={50}
+              deleteSpeed={0}
+              delaySpeed={400}
+              cursor
             />
-            <button type="submit">Search</button>
-          </form>
+          </h1>
         </div>
-
-        {/* Viewport (카드 1장씩) */}
-        <div
-          className="exp__viewport"
-          ref={trackRef}
-          onTouchStart={onTouchStart}
-          onTouchMove={onTouchMove}
-          onTouchEnd={onTouchEnd}
-        >
-          <div
-            className="exp__track"
-            style={{ transform: `translateX(-${index * 100}%)` }}
-            role="group"
-            aria-roledescription="carousel"
-            aria-label="Experience cards"
-          >
-            {items.map((job, i) => (
-              <article
-                className="exp__slide"
-                key={job.id}
-                aria-hidden={index !== i}
-              >
-                <header className="exp__slideHeader">
-                  <div className="exp__heading">
-                    <div className="exp__badge">
-                      <span className="exp__company">[ {job.company} ]</span>
-                      <span className="exp__dot">-</span>
-                      <span className="exp__role">{job.title}</span>
-                    </div>
-                    <div className="exp__meta">
-                      <span>{job.period}</span>
-                      <span className="exp__dot">•</span>
-                      <span>{job.location}</span>
-                    </div>
-                  </div>
-                </header>
-
-                <ul className="exp__bullets">
-                  {job.bullets.map((b, idx) => (
-                    <li key={idx}>{b}</li>
-                  ))}
-                </ul>
-
-                {(job.kpis?.length || job.tech?.length) && (
-                  <footer className="exp__footer">
-                    {job.kpis?.length > 0 && (
-                      <div className="exp__kpis">
-                        {job.kpis.map((k, idx) => (
-                          <div className="exp__kpi" key={idx}>
-                            <span className="exp__kpiLabel">{k.label}</span>
-                            <span className="exp__kpiValue">{k.value}</span>
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                    {job.tech?.length > 0 && (
-                      <ul className="exp__tech">
-                        {job.tech.map((t, idx) => (
-                          <li key={idx} className="exp__chip">
-                            {t}
-                          </li>
-                        ))}
-                      </ul>
-                    )}
-                  </footer>
-                )}
-              </article>
-            ))}
+        <div className="grid grid-2"></div>
+        <div className="grid grid-3"></div>
+        <div className="grid grid-4">
+          <div className="exp__sideBrand" aria-hidden="true">
+          {items[index]?.logo && (
+            <img src={items[index].logo} alt="" className="exp__sideBrandImg" />
+          )}
           </div>
-        </div>
 
-        {/* Viewport 아래 바: Dots(중앙) + Website/Views/Like(우측) */}
-        <div className="exp__viewportBar">
-          {/* 전역 nav 보더 간섭 회피: <div role="tablist"> */}
-          <div className="exp__dots" role="tablist" aria-label="Select experience card">
-            {items.map((_, i) => (
-              <button
-                key={i}
-                role="tab"
-                className={`exp__dotBtn ${index === i ? "is-active" : ""}`}
-                aria-selected={index === i}
-                onClick={() => goTo(i)}
+          <div className="exp__column">
+          <div className="exp__searchRow">
+            <form className="exp__search" onSubmit={onSearch} role="search">
+              <input
+                type="search"
+                placeholder="Search Keywords"
+                value={query}
+                onChange={(e) => setQuery(e.target.value)}
+                aria-label="Search experiences"
               />
-            ))}
+              <button type="submit">Search</button>
+            </form>
           </div>
 
-          <div className="exp__actions">
-            <button
-              className="exp__websiteBtn"
-              onClick={() => openWebsite(items[index]?.website)}
-              type="button"
-              title="Open company website"
+          {/* Viewport (카드 1장씩) */}
+          <div
+            className="exp__viewport"
+            ref={trackRef}
+            onTouchStart={onTouchStart}
+            onTouchMove={onTouchMove}
+            onTouchEnd={onTouchEnd}
+          >
+            <div
+              className="exp__track"
+              style={{ transform: `translateX(-${index * 100}%)` }}
+              role="group"
+              aria-roledescription="carousel"
+              aria-label="Experience cards"
             >
-              Website
-            </button>
+              {items.map((job, i) => (
+                <article
+                  className="exp__slide"
+                  key={job.id}
+                  aria-hidden={index !== i}
+                >
+                  <header className="exp__slideHeader">
+                    <div className="exp__heading">
+                      <div className="exp__badge">
+                        <span className="exp__company">[ {job.company} ]</span>
+                        <span className="exp__dot">-</span>
+                        <span className="exp__role">{job.title}</span>
+                      </div>
+                      <div className="exp__meta">
+                        <span>{job.period}</span>
+                        <span className="exp__dot">•</span>
+                        <span>{job.location}</span>
+                      </div>
+                    </div>
+                  </header>
 
-            <div className="exp__views" title="views">
-              <img src={viewsIcon} alt="views" />
-              <span className="exp__viewsCount">{totalVisits ?? "417"}</span>
-              {/* TODO: 전역 방문자 수 API 연동 */}
+                  <ul className="exp__bullets">
+                    {job.bullets.map((b, idx) => (
+                      <li key={idx}>{b}</li>
+                    ))}
+                  </ul>
+
+                  {(job.kpis?.length || job.tech?.length) && (
+                    <footer className="exp__footer">
+                      {job.kpis?.length > 0 && (
+                        <div className="exp__kpis">
+                          {job.kpis.map((k, idx) => (
+                            <div className="exp__kpi" key={idx}>
+                              <span className="exp__kpiLabel">{k.label}</span>
+                              <span className="exp__kpiValue">{k.value}</span>
+                            </div>
+                          ))}
+                        </div>
+                      )}
+                      {job.tech?.length > 0 && (
+                        <ul className="exp__tech">
+                          {job.tech.map((t, idx) => (
+                            <li key={idx} className="exp__chip">
+                              {t}
+                            </li>
+                          ))}
+                        </ul>
+                      )}
+                    </footer>
+                  )}
+                </article>
+              ))}
+            </div>
+          </div>
+
+          {/* Viewport 아래 바: Dots(중앙) + Website/Views/Like(우측) */}
+          <div className="exp__viewportBar">
+            {/* 전역 nav 보더 간섭 회피: <div role="tablist"> */}
+            <div className="exp__dots" role="tablist" aria-label="Select experience card">
+              {items.map((_, i) => (
+                <button
+                  key={i}
+                  role="tab"
+                  className={`exp__dotBtn ${index === i ? "is-active" : ""}`}
+                  aria-selected={index === i}
+                  onClick={() => goTo(i)}
+                />
+              ))}
             </div>
 
-            <button
-              className={`exp__heartBtn ${likes.has(items[index]?.id) ? "is-liked" : ""}`}
-              aria-pressed={likes.has(items[index]?.id)}
-              onClick={() => toggleLike(items[index]?.id)}
-              title="Like"
-              type="button"
-            >
-              <img src={heartIcon} alt="like" />
-            </button>
+            <div className="exp__actions">
+              <button
+                className="exp__websiteBtn"
+                onClick={() => openWebsite(items[index]?.website)}
+                type="button"
+                title="Open company website"
+              >
+                Website
+              </button>
+
+              <div className="exp__views" title="views">
+                <img src={viewsIcon} alt="views" />
+                <span className="exp__viewsCount">{totalVisits ?? "417"}</span>
+                {/* TODO: 전역 방문자 수 API 연동 */}
+              </div>
+
+              <button
+                className={`exp__heartBtn ${likes.has(items[index]?.id) ? "is-liked" : ""}`}
+                aria-pressed={likes.has(items[index]?.id)}
+                onClick={() => toggleLike(items[index]?.id)}
+                title="Like"
+                type="button"
+              >
+                <img src={heartIcon} alt="like" />
+              </button>
+            </div>
+          </div>
           </div>
         </div>
+        <div className="grid grid-5"></div>
+        <div className="grid grid-6"></div>
+        <div className="grid grid-7"></div>
+        <div className="grid grid-8"></div>
+        <div className="grid grid-9"></div>
       </div>
     </section>
   );

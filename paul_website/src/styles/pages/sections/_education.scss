@@ -5,7 +5,7 @@
   .container {
     display: grid;
     grid-template-columns: auto auto 1fr;
-    grid-template-rows: 25% auto auto;
+    grid-template-rows: 20% auto auto;
 
     .grid-1 {
       grid-column: 1 / 4;
@@ -26,6 +26,7 @@
       display: flex;
       align-items: center;
       justify-content: center;
+      padding-top: 5%;
 
       .edu__stage {
         display: flex;
@@ -84,8 +85,6 @@
 @include f.respond-to(tablet) {
   .education {
     .container {
-      grid-template-rows: 20% auto 1fr;
-
       .grid-1 {
         .edu__title {
           font-size: 45px;
@@ -138,6 +137,8 @@
       }
 
       .grid-4 {
+        padding-top: 0;
+        
         .edu__stage {          
           .edu__item {
             .edu__school {
