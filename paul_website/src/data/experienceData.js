@@ -20,9 +20,7 @@ export const experienceData = [
       { label: "Dashboards", value: "5+" },
       { label: "Update frequency", value: "Daily" },
     ],
-    tech: ["Python", "SQL", "DAX", "Power BI", "MS Excel",
-      "Database", "Energy", "Insight", "Data Analysis", "Data Visualization",
-    ],
+    tech: ["Python", "SQL", "DAX", "Power BI", "MS Excel"],
   },
   {
     id: "excello",

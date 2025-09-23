@@ -8,8 +8,7 @@ const LIKE_STORAGE_KEY = "exp_likes_v1";
 export default function Experience() {
   const items = experienceData;
   
-  const [index, setIndex] = useState(0);
-
+  // LocalStorage에서 좋아요 목록 불러오기
   const [likes, setLikes] = useState(() => {
     try {
       const raw = localStorage.getItem(LIKE_STORAGE_KEY);
@@ -25,6 +24,7 @@ export default function Experience() {
 
   const trackRef = useRef(null);
   const touchStartX = useRef(0);
+  const touchStartY = useRef(0);
   const touchDeltaX = useRef(0);
 
   const clamp = (n) => Math.max(0, Math.min(n, items.length - 1));
@@ -32,6 +32,7 @@ export default function Experience() {
   const prev = () => setIndex((i) => clamp(i - 1));
   const goTo = (i) => setIndex(clamp(i));
 
+  // 키보드 좌우 방향키로 카드 넘김
   useEffect(() => {
     const onKey = (e) => {
       const tag = (e.target?.tagName || "").toLowerCase();
@@ -50,22 +51,43 @@ export default function Experience() {
     return () => window.removeEventListener("keydown", onKey);
   }, [items.length]);
 
-  // 터치 스와이프
+  // 터치 스와이프 (가로 방향만 인식)
   const onTouchStart = (e) => {
     touchStartX.current = e.touches[0].clientX;
+    touchStartY.current = e.touches[0].clientY;
     touchDeltaX.current = 0;
   };
+
   const onTouchMove = (e) => {
-    touchDeltaX.current = e.touches[0].clientX - touchStartX.current;
+    const dx = e.touches[0].clientX - touchStartX.current;
+    const dy = e.touches[0].clientY - touchStartY.current;
+    if (Math.abs(dy) > Math.abs(dx)) return; // 세로 스크롤이면 무시
+    touchDeltaX.current = dx;
   };
+
   const onTouchEnd = () => {
     const threshold = 48;
     if (touchDeltaX.current > threshold) prev();
     else if (touchDeltaX.current < -threshold) next();
+
     touchStartX.current = 0;
+    touchStartY.current = 0;
     touchDeltaX.current = 0;
   };
 
+  const [index, setIndex] = useState(0);
+  const [delayedIndex, setDelayedIndex] = useState(index);
+
+  // ▶ 카드 전환 후 로고가 자연스럽게 바뀌도록 딜레이 설정
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setDelayedIndex(index);
+    }, 400); // 카드 전환 트랜지션과 일치하는 시간 (ms 단위)
+
+    return () => clearTimeout(timer);
+  }, [index]);
+
+  // 좋아요 toggle
   const toggleLike = (jobId) => {
     setLikes((prev) => {
       const nextSet = new Set(prev);
@@ -83,8 +105,9 @@ export default function Experience() {
     window.open(url, "_blank", "noopener,noreferrer");
   };
 
+  // 검색 기능
   const [query, setQuery] = useState("");
-  const [searchProgress, setSearchProgress] = useState({}); // { [lowerQuery]: lastIndex }
+  const [searchProgress, setSearchProgress] = useState({});
 
   const findAllMatchIndices = (q) => {
     const needle = q.trim().toLowerCase();
@@ -112,7 +135,7 @@ export default function Experience() {
     const matches = findAllMatchIndices(q);
     if (matches.length === 0) return;
     const last = searchProgress[q] ?? -1;
-    const nextIdx = matches.find((idx) => idx > last) ?? matches[0]; // 순환
+    const nextIdx = matches.find((idx) => idx > last) ?? matches[0];
     setIndex(nextIdx);
     setSearchProgress((prev) => ({ ...prev, [q]: nextIdx }));
   };
@@ -148,7 +171,8 @@ export default function Experience() {
           </div>
 
           {/* Viewport (카드 1장씩) */}
-          <div className="exp__viewport"
+          <div
+            className="exp__viewport"
             ref={trackRef}
             onTouchStart={onTouchStart}
             onTouchMove={onTouchMove}
@@ -170,9 +194,8 @@ export default function Experience() {
                   <header className="exp__slideHeader">
                     <div className="exp__heading">
                       <div className="exp__badge">
-                        <span className="exp__company">[ {job.company} ]</span>
-                        <span className="exp__dot">-</span>
-                        <span className="exp__role">{job.title}</span>
+                        <div className="exp__role">{job.title}</div>
+                        <div className="exp__company">[ {job.company} ]</div>
                       </div>
                       <div className="exp__meta">
                         <span>{job.period}</span>
@@ -212,8 +235,17 @@ export default function Experience() {
                     </footer>
                   )}
                   <div className="exp__sideBrand mobile">
-                    {items[index]?.logo && (
-                      <img src={items[index].logo} alt="" className="exp__sideBrandImg" />
+                    {items[delayedIndex]?.logo && (
+                      <>
+                        <img
+                          src={items[delayedIndex].logo}
+                          alt=""
+                          className="exp__sideBrandImg"
+                          onClick={() => openWebsite(items[delayedIndex].website)}
+                          style={{ cursor: "pointer" }}
+                        />
+                        <div className="exp__visitText">Click to visit website</div>
+                      </>
                     )}
                   </div>
                 </article>
@@ -223,7 +255,6 @@ export default function Experience() {
 
           {/* Viewport 아래 바: Dots(중앙) + Website/Views/Like(우측) */}
           <div className="exp__viewportBar">
-            {/* 전역 nav 보더 간섭 회피: <div role="tablist"> */}
             <div className="exp__dots" role="tablist" aria-label="Select experience card">
               {items.map((_, i) => (
                 <button
@@ -240,7 +271,6 @@ export default function Experience() {
               <div className="exp__views" title="views">
                 <img src={viewsIcon} alt="views" />
                 <span className="exp__viewsCount">{totalVisits ?? "417"}</span>
-                {/* TODO: 전역 방문자 수 API 연동 */}
               </div>
 
               <button

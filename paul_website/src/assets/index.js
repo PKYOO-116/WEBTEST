@@ -17,8 +17,8 @@ import logoMSU from "./logos/M-State_Maroon(RGB).svg";
 
 // Experience logos
 import logoFPM from "./logos/FPM_logo.png";
-import logoExcello from "./logos/엑셀로_흰색기본로고.png";
-import logoKDB from "./logos/한국산업은행CI_가로조합_영문_그라데이션.png";
+import logoExcello from "./logos/EXCELLO.png";
+import logoKDB from "./logos/KDB.jpg";
 import logoROKAF from "./logos/Republic_of_Korea_Air_Force_emblem.png";
 import logoSYPM from "./logos/SYPM.png";
 import viewsIcon from "./logos/views.jpeg"

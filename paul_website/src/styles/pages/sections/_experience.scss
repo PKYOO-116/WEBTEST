@@ -30,6 +30,7 @@
       grid-template-columns: 1fr;
       grid-template-rows: auto 1fr auto;
       overflow-y: auto;
+      padding: 10%;
 
       align-items: flex-start;
       justify-content: center;
@@ -37,6 +38,7 @@
       .exp__searchRow {
         display: flex;
         justify-content: flex-end;
+        margin: 0 16px, 10px, 0;
 
         form.exp__search {
           display: flex;
@@ -73,8 +75,9 @@
       .exp__viewport {
         grid-area: 2 / 1 / 3 / 2;
         width: 100%;
-        height: 100%;
+        height: 80%;
         overflow: hidden;
+        overflow-y: visible;
         border-radius: 20px;
         background: rgba(f.$white, 0.03);
         border: 0;
@@ -92,7 +95,16 @@
             padding: 40px;
             gap: 16px;
             align-content: start;
-            display: grid;            
+            display: grid;
+            overflow-y: auto;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+  
+            &::-webkit-scrollbar {
+              display: none;
+              width: 0;
+              height: 0;
+            }
             
             header.exp__slideHeader {
               display: grid;
@@ -103,11 +115,22 @@
 
                 .exp__badge {
                   display: flex;
-                  flex-wrap: wrap;
-                  gap: 15px;
-                  font-weight: 800;
-                  font-size: 10px;
+                  flex-direction: column;
+                  align-items: flex-start;
+                  gap: 4px;
+
+                  .exp__role {
+                    font-weight: 800;
+                    font-size: 12px;
+                  }
+
+                  .exp__company {
+                    font-weight: 600;
+                    font-size: 10px;
+                    color: rgba(f.$white, 0.85);
+                  }
                 }
+
                 .exp__meta {
                   display: flex;
                   gap: 10px;
@@ -175,10 +198,17 @@
             
             .mobile {
               place-self: center;
-              max-width: 50%;
+              max-width: 70%;
+              margin-top: 50px;
 
               .exp__sideBrandImg{
                 display:block;
+              }
+              .exp__visitText {
+                margin-top: 10px;
+                text-align: center;
+                font-size: 10px;
+                color: rgba(f.$white, 0.7);
               }
             }
           }
@@ -218,7 +248,7 @@
             outline: none;
             box-shadow: none;
 
-            .is-active{
+            &.is-active{
               background: rgba(f.$white, 0.92);
               transform: scale(1.08);
             }

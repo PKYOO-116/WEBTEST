@@ -2,9 +2,9 @@
 // // section {
 // //   border: 2px dashed red;
 // // }
-// // .container {
-// //   border: 2px solid skyblue;
-// // }
+// .container {
+//   border: 2px solid skyblue;
+// }
 // .grid {
 //   border: 2px dashed orange;
 // }
@@ -77,21 +77,21 @@
 // //   border: 2px solid greenyellow;
 // // }
 
-// .exp__searchRow {
-//   border: 2px solid cyan;
-// }
+.exp__searchRow {
+  border: 2px solid cyan;
+}
 // .exp__viewport {
+//   border: 2px solid red;
+// }
+// .exp__track {
 //   border: 2px solid purple;
 // }
-// // .exp__track {
-// //   border: 2px solid purple;
-// // }
-// // .exp__slide {
-// //   border: 2px solid purple;
-// // }
-// .exp__viewportBar {
-//   border: 2px solid orange
-// }
+.exp__slide {
+  border: 2px solid purple;
+}
+.exp__viewportBar {
+  border: 2px solid orange
+}
 
 // // .grid-6 {
 // //   border: 2px solid blue;
