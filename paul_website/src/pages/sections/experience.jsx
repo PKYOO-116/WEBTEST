@@ -164,7 +164,7 @@ export default function Experience() {
   };
 
   const onTouchEnd = () => {
-    const threshold = 15;
+    const threshold = 10;
     if (touchDeltaX.current > threshold) prev();
     else if (touchDeltaX.current < -threshold) next();
 
