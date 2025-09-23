@@ -174,7 +174,8 @@ export default function Experience() {
         </div>
         <div className="grid grid-2"></div>
         <div className="grid grid-3"></div>
-        <div className="grid grid-4">
+        <div className="grid grid-4"></div>
+        <div className="grid grid-5">
           <div className="exp__searchRow">
             <form className="exp__search" onSubmit={onSearch} role="search">
               <input
@@ -210,8 +211,15 @@ export default function Experience() {
                           <div className="exp__company">[ {job.company} ]</div>
                         </div>
                         <div className="exp__meta">
-                          <div>{job.period}</div>
-                          <div>{job.location}</div>
+                          <div className="mobile tablet">
+                            <div>{job.period}</div>
+                            <div>{job.location}</div>
+                          </div>
+                          <div className="desktop">
+                            <span>{job.period}</span>
+                            <span className="exp__dot">•</span>
+                            <span>{job.location}</span>
+                          </div>
                         </div>
                       </div>
                     </header>
@@ -255,7 +263,7 @@ export default function Experience() {
                             onClick={() => openWebsite(job.website)}
                             style={{ cursor: "pointer" }}
                           />
-                          <div className="exp__visitText">⬆︎ Click to visit website</div>
+                          <div className="exp__visitText mobile tablet">⬆︎ Click to visit website</div>
                         </>
                       )}
                     </div>
@@ -312,12 +320,12 @@ export default function Experience() {
             </div>
           </div>
         </div>
-        <div className="grid grid-5"></div>
         <div className="grid grid-6">
           <div className="exp__sideBrand desktop">
             {items[index]?.logo && (
               <img src={items[index].logo} alt="" className="exp__sideBrandImg" />
             )}
+            <div className="exp__visitText desktop">⬆︎ Click to visit website</div>
           </div>
         </div>
         <div className="grid grid-7"></div>

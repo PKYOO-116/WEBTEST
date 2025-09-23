@@ -95,7 +95,7 @@ nav {
 /* Desktop ------------------------------------------------------------------------------------------------*/
 @include f.respond-to(desktop) {
   :root {
-    --nav-h: 60px !important;
+    --nav-h: 64px !important;
   }
 
   nav {

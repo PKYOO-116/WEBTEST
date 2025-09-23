@@ -130,6 +130,7 @@
 @include f.respond-to(desktop) {
   .education {
     .container {
+      grid-template-rows: 15% auto auto;
       .grid-1 {
         .edu__title {
           font-size: 70px;

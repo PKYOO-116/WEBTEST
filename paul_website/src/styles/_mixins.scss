@@ -2,8 +2,8 @@
 
 @mixin container {
   width: 100%;
-  height: calc(100svh - var(--nav-h));
-  margin-top: var(--nav-h)
+  height: 100%;
+  padding-top: var(--nav-h)
 }
 
 section {
