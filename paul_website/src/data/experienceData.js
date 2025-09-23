@@ -26,7 +26,7 @@ export const experienceData = [
     id: "excello",
     company: "EXCELLO",
     logo: logoExcello,
-    title: "Project Manager | Strategic Planning Assistant Manager",
+    title: "Project Manager ﹣ Strategic Planning Assistant Manager",
     period: "2021.04 – 2022.10 (1y 7m)",
     location: "South Korea",
     website: "https://iexcello.com/",
