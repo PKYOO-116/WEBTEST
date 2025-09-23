@@ -21,6 +21,7 @@
 
     .grid-4 {
       grid-area: 2 / 1 / 3 / 3;
+      position: relative;
       min-width: 0;
       height: 100%;
       margin: 0;
@@ -95,7 +96,6 @@
             flex-direction: column;
             height: 65svh;
             min-width: 100%;
-            gap: 16px;
             padding: 40px;
             overflow: hidden;
             
@@ -140,10 +140,6 @@
                     flex-direction: column;
                     align-items: flex-start;
                     font-size: 18px;
-
-                    .exp__dot {
-                      opacity: 0.6;
-                    }
                   }
                 }
               }
@@ -198,9 +194,9 @@
 
               ul.exp__bullets {
                 display: grid;
-                padding-left: 20px;
-                gap: 15px;
-                font:400 20px f.$font-base;
+                padding: 20px 0 0 20px;
+                gap: 25px;
+                font:400 18px/1.4 f.$font-base;
               }
               
               .mobile {
@@ -214,13 +210,41 @@
                 .exp__visitText {
                   margin-top: 10px;
                   text-align: center;
-                  font-size: 13px;
+                  font-size: 16px;
                   color: rgba(f.$white, 0.7);
                   white-space: nowrap;
                 }
               }
             }
           }
+        }
+      }
+
+      .exp__arrowBtn {
+        position: absolute;
+        top: 45%;
+        transform: translateY(-50%);
+        z-index: 2;
+        background: rgba(255, 255, 255, 0.08);
+        border: none;
+        border-radius: 50%;
+        width: 36px;
+        height: 36px;
+        display: grid;
+        place-items: center;
+        cursor: pointer;
+
+        img {
+          width: 20px;
+          height: 20px;
+        }
+
+        &--left {
+          left: 20px; // 필요에 따라 조정
+        }
+
+        &--right {
+          right: 20px; // 필요에 따라 조정
         }
       }
 
@@ -316,219 +340,81 @@
 @include f.respond-to(tablet) {
   .experience {
     .container {
-      display: grid;
-      grid-template-columns: auto 1fr auto;
-      grid-template-rows: 5% 1fr auto;
+      grid-template-rows: 10% 1fr auto;
 
       .grid-1 {
-        grid-area: 1 / 1 / 2 / 4;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
         h1.exp__title {
-          font:800 35px f.$font-base;
+          font-size: 45px;
         }
       }
 
       .grid-4 {
-        grid-area: 2 / 1 / 3 / 3;
-        min-width: 0;
-        height: 100%;
-        margin: 0;
-        gap: 10px;
-
-        display: grid;
-        grid-template-columns: 1fr;
-        grid-template-rows: auto 1fr 1fr;
-        overflow-y: auto;
-        padding: 30px 30px 0 30px;
-
-        align-items: flex-start;
-        justify-content: center;
+        gap: 20px;
+        padding: 30px 90px 0 90px;
       
         .exp__searchRow {
-          display: flex;
-          justify-content: flex-end;
-          padding-right: 10px;
-
           form.exp__search {
-            display: flex;
-            gap: 6px;
-            z-index: 1;
-
-            input[type="search"] {
-              background: rgba(f.$white, 0.08);
-              border: 1px solid rgba(f.$white, 0.12);
-              color: f.$white;
-              padding: 6px 10px;
-              border-radius: 10px;
-              width: clamp(160px, 20vw, 240px);
-              max-width: 100%;
-              outline: none;
-
-              &:focus{
-                outline: 2px solid rgba(f.$white, 0.45);
-              }
-
-            }
-
-            button[type="submit"] {
-              border: 1px solid rgba(f.$white, 0.12);
-              background: transparent;
-              color: f.$white;
-              padding: 6px 10px;
-              border-radius: 10px;
-              cursor: pointer;
-            }
+            gap: 10px;
           }
         }
 
         .exp__viewport {
-          grid-area: 2 / 1 / 3 / 2;
-          width: 100%;
-          height: 60svh;
-          overflow: hidden;
-          border-radius: 20px;
-          border-bottom: 40px solid rgba(f.$black, 0);
-          background: rgba(f.$white, 0.03);
-          box-shadow: none;
-          scrollbar-width: none;
-
+          height: 50svh;
 
           .exp__track {
-            display: flex;
-            will-change: transform;
-            transition: transform 400ms ease;
-            min-height: 100%;
-
             article.exp__slide {
-              display: flex;
-              flex-direction: column;
-              height: 65svh;
-              min-width: 100%;
-              gap: 16px;
-              padding: 40px;
-              overflow: hidden;
-              
-              align-content: start;
+              height: 55svh;
               
               .exp__slideContent {
-                overflow-y: auto;
-                max-height: 100%;
-                scrollbar-width: none;
-                &::-webkit-scrollbar {
-                  display: none;
-                }
-                
-
                 header.exp__slideHeader {
-                  display: grid;
-
                   .exp__heading {
-                  display: grid;
-                    gap: 10px;
+                    gap: 15px;
 
                     .exp__badge {
-                      display: flex;
-                      flex-direction: column;
-                      align-items: flex-start;
-                      gap: 4px;
+                      gap: 10px;
 
                       .exp__role {
-                        font-weight: 800;
-                        font-size: 28px;
+                        font-size: 29px;
                       }
 
                       .exp__company {
-                        font-weight: 600;
-                        font-size: 20px;
-                        color: rgba(f.$white, 0.85);
+                        font-size: 25px;
                       }
                     }
 
                     .exp__meta {
-                      display: flex;
-                      flex-direction: column;
-                      align-items: flex-start;
-                      font-size: 18px;
-
-                      .exp__dot {
-                        opacity: 0.6;
-                      }
+                      font-size: 20px;
                     }
                   }
                 }
                 
-                footer.exp__footer {
-                  display: grid;
-                  gap: 25px;
-                  margin-top: 40px;
-                  
+                footer.exp__footer {                  
                   .exp__kpis {
-                    display: grid;
-                    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-                    gap: 20px;
                     .exp__kpi {
-                      background-color: f.$exp-kpi;
-                      border-radius: 10px;
-                      padding: 10px 15px;
-                      gap: 10px;
-                      display: flex;
-                      align-items: center;
-                      justify-content: space-between;
+                      padding: 10px 20px;
                       
                       .exp__kpiLabel {
-                        font-weight: 500;
-                        font-size: 16px;
+                        font-size: 18px;
                       }
                       
                       .exp__kpiValue {
-                        font-weight: 1000;
-                        font-size: 16px;
+                        font-size: 18px;
                       }
                     }
                   }
                   ul.exp__tech {
-                    display: flex;
-                    flex-wrap: wrap;
-                    gap: 20px;
-                    margin: 0;
-                    padding: 0;
-                    list-style: none;
-
                     li.exp__chip {
-                      background: f.$exp-tech;
-                      color: f.$black;
-                      border-radius: 10px;
-                      padding: 10px 10px;
-                      font-size: 16px;
-                      font-weight: 800;
+                      font-size: 18px;
                     }
                   }
                 }
-
-                ul.exp__bullets {
-                  display: grid;
-                  padding-left: 20px;
-                  gap: 15px;
-                  font:400 20px f.$font-base;
-                }
                 
-                .mobile {
+                .tablet {
                   place-self: center;
                   margin: 80px 0;
-
-                  .exp__sideBrandImg{
-                    display:block;
-                    width: 100%;
-                  }
                   .exp__visitText {
-                    margin-top: 10px;
-                    text-align: center;
-                    font-size: 13px;
-                    color: rgba(f.$white, 0.7);
-                    white-space: nowrap;
+                    margin-top: 15px;
+                    font-size: 18px;
                   }
                 }
               }
@@ -536,34 +422,38 @@
           }
         }
 
+        .exp__arrowBtn {
+          top: 40%;
+          width: 50px;
+          height: 50px;
+
+          img {
+            width: 35px;
+            height: 35px;
+          }
+
+          &--left {
+            left: 50px; // 필요에 따라 조정
+          }
+
+          &--right {
+            right: 50px; // 필요에 따라 조정
+          }
+        }
+
         .exp__viewportBar {
-          grid-area: 3 / 1 / 4 / 2;
-          width: 100%;
-          display: flex;
-          flex-direction: column;
-          align-items: center;
-          justify-content: center;
-          gap: 10px;
+          gap: 20px;
 
           .exp__dots {
-            display: flex;
-            gap: 18px;
+            gap: 30px;
 
             button.exp__dotBtn {
-              width: 16px;
-              height: 16px;
-              border-radius: 999px;
-              border: none;
-              background: rgba(f.$white, 0.24);
-              cursor: pointer;
-              outline: none;
-              box-shadow: none;
+              width: 25px;
+              height: 25px;
 
               &.is-active{
-                width: 18px;
-                height: 18px;
-                background: rgba(orange, 1);
-                transform: scale(1.08);
+                width: 30px;
+                height: 30px;
               }
             }
           }
@@ -571,39 +461,24 @@
           .exp__actions {
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 35px;
 
             .exp__views {
-                display: inline-flex;
-                align-items: center;
-                gap: 6px;
-                font-weight: 700;
-                font-size: 18px;
+                font-size: 20px;
+
               img {
-                width: 36px;
-                height: 36px;
+                width: 48px;
+                height: 48px;
               }
             }
 
             button.exp__heartBtn {
-              width: 36px;
-              height: 36px;
-              border-radius: 30px;
-              display: grid;
-              place-items: center;
-              border: 1.5px solid rgba(f.$white, 0.12);
-              background: transparent;
-              cursor: pointer;
+              width: 48px;
+              height: 48px;
+              border: 2px solid rgba(f.$white, 0.12);
 
               img {
-                width: 30px;
-                height: auto;
-                object-fit: contain;
-                
-              }
-              
-              &.is-liked {
-                background: rgba(235, 41, 90, 0.18); 
+                width: 42px;
               }
             }
           }
@@ -611,12 +486,6 @@
       }
 
       .grid-6{
-        grid-area: 2 / 3 / 3 / 4;
-
-        .tablet {
-          display: none;
-        }
-
         .desktop {
           display: none;
         }
@@ -627,7 +496,160 @@
 
 /* Desktop --------------------------------------------------------------------------------------------------------------------------------- */
 @include f.respond-to(desktop) {
+  .experience {
+    .container {
+      grid-template-rows: 10% 1fr auto;
 
+      .grid-1 {
+        h1.exp__title {
+          font-size: 45px;
+        }
+      }
+
+      .grid-4 {
+        gap: 20px;
+        padding: 30px 90px 0 90px;
+      
+        .exp__searchRow {
+          form.exp__search {
+            gap: 10px;
+          }
+        }
+
+        .exp__viewport {
+          height: 50svh;
+
+          .exp__track {
+            article.exp__slide {
+              height: 55svh;
+              
+              .exp__slideContent {
+                header.exp__slideHeader {
+                  .exp__heading {
+                    gap: 15px;
+
+                    .exp__badge {
+                      gap: 10px;
+
+                      .exp__role {
+                        font-size: 29px;
+                      }
+
+                      .exp__company {
+                        font-size: 25px;
+                      }
+                    }
+
+                    .exp__meta {
+                      font-size: 20px;
+                    }
+                  }
+                }
+                
+                footer.exp__footer {                  
+                  .exp__kpis {
+                    .exp__kpi {
+                      padding: 10px 20px;
+                      
+                      .exp__kpiLabel {
+                        font-size: 18px;
+                      }
+                      
+                      .exp__kpiValue {
+                        font-size: 18px;
+                      }
+                    }
+                  }
+                  ul.exp__tech {
+                    li.exp__chip {
+                      font-size: 18px;
+                    }
+                  }
+                }
+                
+                .tablet {
+                  place-self: center;
+                  margin: 80px 0;
+                  .exp__visitText {
+                    margin-top: 15px;
+                    font-size: 18px;
+                  }
+                }
+              }
+            }
+          }
+        }
+
+        .exp__arrowBtn {
+          top: 40%;
+          width: 50px;
+          height: 50px;
+
+          img {
+            width: 35px;
+            height: 35px;
+          }
+
+          &--left {
+            left: 50px; // 필요에 따라 조정
+          }
+
+          &--right {
+            right: 50px; // 필요에 따라 조정
+          }
+        }
+
+        .exp__viewportBar {
+          gap: 20px;
+
+          .exp__dots {
+            gap: 30px;
+
+            button.exp__dotBtn {
+              width: 25px;
+              height: 25px;
+
+              &.is-active{
+                width: 30px;
+                height: 30px;
+              }
+            }
+          }
+
+          .exp__actions {
+            display: flex;
+            align-items: center;
+            gap: 35px;
+
+            .exp__views {
+                font-size: 20px;
+
+              img {
+                width: 48px;
+                height: 48px;
+              }
+            }
+
+            button.exp__heartBtn {
+              width: 48px;
+              height: 48px;
+              border: 2px solid rgba(f.$white, 0.12);
+
+              img {
+                width: 42px;
+              }
+            }
+          }
+        }
+      }
+
+      .grid-6{
+        .desktop {
+          display: none;
+        }
+      }
+    }
+  }
 }
 /* LargeDesktop --------------------------------------------------------------------------------------------------------------------------------- */
 @include f.respond-to(large-desktop) {

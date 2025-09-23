@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState, useLayoutEffect } from "react";
-import { viewsIcon, heartIcon } from "../../assets";
+import { viewsIcon, heartIcon, arrowLeft, arrowRight } from "../../assets";
 import { experienceData } from "../../data/experienceData";
 import { Typewriter } from "react-simple-typewriter";
 
@@ -25,9 +25,6 @@ export default function Experience() {
   // ▶ ref 정의
   const slideRefs = useRef([]);
   const trackRef = useRef(null);
-  const touchStartX = useRef(0);
-  const touchStartY = useRef(0);
-  const touchDeltaX = useRef(0);
 
   // ▶ 카드 넘김 관련 유틸
   const clamp = (n) => Math.max(0, Math.min(n, items.length - 1));
@@ -50,99 +47,46 @@ export default function Experience() {
       console.log("After scrollTop:", content.scrollTop);
     }
   };
-
+  
+  // 카드 내외 상하 스크롤링 전환 빠르게
   useEffect(() => {
-    // 1. 카드 전환 시 맨 위로 스크롤하는 기능
-    // 휠 이벤트 리스너가 안정적으로 붙은 후 실행되도록 약간의 딜레이(100ms)를 줍니다.
-    const timer = setTimeout(() => {
-      scrollToTopOfSlideContent();
-    }, 100);
+      // 카드 전환 시 실행
+      const timer = setTimeout(() => {
+        scrollToTopOfSlideContent();
+      }, 0); // 또는 100~300ms로 조정 가능
 
-    // 2. 휠 이벤트(스크롤) 처리 기능
-    const slide = slideRefs.current[index];
-    const content = slide?.querySelector(".exp__slideContent");
-
-    // content가 없으면 아무것도 하지 않고 타이머만 정리합니다.
-    if (!content) {
       return () => clearTimeout(timer);
-    }
+    }, [index]);
+
+    useEffect(() => {
+    const slide = slideRefs.current[index];
+    if (!slide) return;
+
+    const content = slide.querySelector(".exp__slideContent");
+    if (!content) return;
 
     const onWheel = (e) => {
-      const { deltaX, deltaY } = e;
-
-      // 2-1. 좌우 스크롤(마우스 휠 가로)로 카드 넘김
-      if (Math.abs(deltaX) > Math.abs(deltaY)) {
-        if (deltaX > 10) next();
-        else if (deltaX < -10) prev();
-        e.preventDefault();
-        return;
-      }
-
-      // 2-2. 상하 스크롤 경계 처리
       const { scrollTop, scrollHeight, clientHeight } = content;
+
       const isAtTop = scrollTop === 0;
-      const isAtBottom = Math.ceil(scrollTop + clientHeight) >= scrollHeight;
+      const isAtBottom = scrollTop + clientHeight >= scrollHeight;
 
       if (
-        (deltaY < 0 && isAtTop) || 
-        (deltaY > 0 && isAtBottom)
+        (e.deltaY < 0 && isAtTop) ||
+        (e.deltaY > 0 && isAtBottom)
       ) {
-        // 외부로 스크롤 전파
+        // 외부로 스크롤을 전달 (부모로)
         return;
       }
-      
-      // 그 외의 모든 상하 스크롤은 내부에서만 작동 (외부 스크롤 방지)
+
+      // 내부에서만 처리
       e.stopPropagation();
     };
 
     content.addEventListener("wheel", onWheel, { passive: false });
 
-    // 3. cleanup 함수: 타이머와 이벤트 리스너를 한번에 모두 정리
-    return () => {
-      clearTimeout(timer);
-      content.removeEventListener("wheel", onWheel);
-    };
-  }, [index]); // 이 모든 로직은 index가 변경될 때마다 실행됩니다.
-
-  // // 카드 내외 상하 스크롤링 전환 빠르게
-  // useEffect(() => {
-  //     // 카드 전환 시 실행
-  //     const timer = setTimeout(() => {
-  //       scrollToTopOfSlideContent();
-  //     }, 0); // 또는 100~300ms로 조정 가능
-
-  //     return () => clearTimeout(timer);
-  //   }, [index]);
-
-  //   useEffect(() => {
-  //   const slide = slideRefs.current[index];
-  //   if (!slide) return;
-
-  //   const content = slide.querySelector(".exp__slideContent");
-  //   if (!content) return;
-
-  //   const onWheel = (e) => {
-  //     const { scrollTop, scrollHeight, clientHeight } = content;
-
-  //     const isAtTop = scrollTop === 0;
-  //     const isAtBottom = scrollTop + clientHeight >= scrollHeight;
-
-  //     if (
-  //       (e.deltaY < 0 && isAtTop) || // 스크롤 올릴 때 맨 위
-  //       (e.deltaY > 0 && isAtBottom) // 스크롤 내릴 때 맨 아래
-  //     ) {
-  //       // 외부로 스크롤을 전달 (부모로)
-  //       return;
-  //     }
-
-  //     // 내부에서만 처리
-  //     e.stopPropagation();
-  //   };
-
-  //   content.addEventListener("wheel", onWheel, { passive: false });
-
-  //   return () => content.removeEventListener("wheel", onWheel);
-  // }, [index]);
+    return () => content.removeEventListener("wheel", onWheel);
+  }, [index]);
 
   // ▶ 키보드 좌우 방향키로 카드 넘김
   useEffect(() => {
@@ -162,79 +106,6 @@ export default function Experience() {
     window.addEventListener("keydown", onKey, { passive: false });
     return () => window.removeEventListener("keydown", onKey);
   }, [items.length]);
-
-  // // 카드 좌우 스크롤
-  // useEffect(() => {
-  //   const slide = slideRefs.current[index];
-  //   if (!slide) return;
-
-  //   const content = slide.querySelector(".exp__slideContent");
-  //   if (!content) return;
-
-  //   const onWheel = (e) => {
-  //     const { deltaX, deltaY } = e;
-
-  //     // 1. 좌우 스크롤 감지
-  //     if (Math.abs(deltaX) > Math.abs(deltaY)) {
-  //       if (deltaX > 10) next();     // 오른쪽으로 스크롤 → 다음 카드
-  //       else if (deltaX < -10) prev(); // 왼쪽으로 스크롤 → 이전 카드
-  //       e.preventDefault(); // 브라우저 기본 동작 방지
-  //     }
-
-  //     // 2. 위아래 스크롤 시 외부 전파 방지
-  //     const { scrollTop, scrollHeight, clientHeight } = content;
-  //     const atTop = scrollTop === 0;
-  //     const atBottom = scrollTop + clientHeight >= scrollHeight;
-
-  //     if (
-  //       (deltaY < 0 && atTop) ||
-  //       (deltaY > 0 && atBottom)
-  //     ) {
-  //       // 외부로 넘김
-  //       return;
-  //     }
-
-  //     e.stopPropagation();
-  //   };
-
-  //   content.addEventListener("wheel", onWheel, { passive: false });
-
-  //   return () => content.removeEventListener("wheel", onWheel);
-  // }, [index]);
-
-  // ▶ 터치 스와이프 (가로 방향만 인식)
-  const onTouchStart = (e) => {
-    touchStartX.current = e.touches[0].clientX;
-    touchStartY.current = e.touches[0].clientY;
-    touchDeltaX.current = 0;
-  };
-
-  const onTouchMove = (e) => {
-    const dx = e.touches[0].clientX - touchStartX.current;
-    const dy = e.touches[0].clientY - touchStartY.current;
-    if (Math.abs(dy) > Math.abs(dx)) return;
-    touchDeltaX.current = dx;
-  };
-
-  const onTouchEnd = () => {
-    console.log("Touch deltaX:", touchDeltaX.current);
-    console.log("Index before:", index);
-
-    const threshold = 10;
-    if (touchDeltaX.current > threshold) {
-      prev();
-      console.log("Moved to previous");
-    } else if (touchDeltaX.current < -threshold) {
-      next();
-      console.log("Moved to next");
-    }
-
-    console.log("Index after:", index);
-
-    touchStartX.current = 0;
-    touchStartY.current = 0;
-    touchDeltaX.current = 0;
-  };
 
   // ▶ 검색 기능
   const findAllMatchIndices = (q) => {
@@ -318,12 +189,8 @@ export default function Experience() {
           </div>
 
           {/* Viewport (카드 1장씩) */}
-          <div
-            className="exp__viewport"
+          <div className="exp__viewport"
             ref={trackRef}
-            onTouchStart={onTouchStart}
-            onTouchMove={onTouchMove}
-            onTouchEnd={onTouchEnd}
           >
             <div
               className="exp__track"
@@ -378,7 +245,7 @@ export default function Experience() {
                       ))}
                     </ul>
 
-                    <div className="exp__sideBrand mobile">
+                    <div className="exp__sideBrand mobile tablet">
                       {job.logo && (
                         <>
                           <img
@@ -397,6 +264,21 @@ export default function Experience() {
               ))}
             </div>
           </div>
+          
+          <button
+            className="exp__arrowBtn exp__arrowBtn--left"
+            onClick={prev}
+            aria-label="Previous slide"
+          >
+            <img src={arrowLeft} alt="Previous" />
+          </button>
+          <button
+            className="exp__arrowBtn exp__arrowBtn--right"
+            onClick={next}
+            aria-label="Next slide"
+          >
+            <img src={arrowRight} alt="Next" />
+          </button>
 
           {/* Viewport 아래 바: Dots(중앙) + Website/Views/Like(우측) */}
           <div className="exp__viewportBar">
@@ -432,7 +314,7 @@ export default function Experience() {
         </div>
         <div className="grid grid-5"></div>
         <div className="grid grid-6">
-          <div className="exp__sideBrand tablet desktop">
+          <div className="exp__sideBrand desktop">
             {items[index]?.logo && (
               <img src={items[index].logo} alt="" className="exp__sideBrandImg" />
             )}

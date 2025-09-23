@@ -23,6 +23,8 @@ import logoROKAF from "./logos/Republic_of_Korea_Air_Force_emblem.png";
 import logoSYPM from "./logos/SYPM.png";
 import viewsIcon from "./logos/views.jpeg"
 import heartIcon from "./logos/heart.png"
+import arrowLeft from "./logos/arrow_left.png"
+import arrowRight from "./logos/arrow_right.png"
 
 // Leadership logos & photos
 import logoAAII from "./logos/AAII_Logo-White.svg";
@@ -54,10 +56,12 @@ export {
   logoFPM,
   logoExcello,
   logoKDB,
-  viewsIcon,
-  heartIcon,
   logoROKAF,
   logoSYPM,
+  viewsIcon,
+  heartIcon,
+  arrowLeft,
+  arrowRight,
   logoAAII,
   logoFMA,
   logoGoel,
