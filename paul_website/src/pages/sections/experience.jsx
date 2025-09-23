@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useLayoutEffect } from "react";
 import { viewsIcon, heartIcon } from "../../assets";
 import { experienceData } from "../../data/experienceData";
 import { Typewriter } from "react-simple-typewriter";
@@ -7,8 +7,11 @@ const LIKE_STORAGE_KEY = "exp_likes_v1";
 
 export default function Experience() {
   const items = experienceData;
-  
-  // LocalStorage에서 좋아요 목록 불러오기
+
+  // ▶ 상태 정의 (상단에 먼저 위치)
+  const [index, setIndex] = useState(0);
+  const [query, setQuery] = useState("");
+  const [searchProgress, setSearchProgress] = useState({});
   const [likes, setLikes] = useState(() => {
     try {
       const raw = localStorage.getItem(LIKE_STORAGE_KEY);
@@ -17,22 +20,78 @@ export default function Experience() {
       return new Set();
     }
   });
-
-  // 전역 방문자 수(후연동 자리)
-  // TODO: fetch('/api/visits/whoami').then(r=>r.json()).then(({ total }) => setTotal(total))
   const [totalVisits /*, setTotal*/] = useState(null);
 
+  // ▶ ref 정의
+  const slideRefs = useRef([]);
   const trackRef = useRef(null);
   const touchStartX = useRef(0);
   const touchStartY = useRef(0);
   const touchDeltaX = useRef(0);
 
+  // ▶ 카드 넘김 관련 유틸
   const clamp = (n) => Math.max(0, Math.min(n, items.length - 1));
   const next = () => setIndex((i) => clamp(i + 1));
   const prev = () => setIndex((i) => clamp(i - 1));
   const goTo = (i) => setIndex(clamp(i));
 
-  // 키보드 좌우 방향키로 카드 넘김
+  const scrollToTopOfSlideContent = () => {
+    const slide = slideRefs.current[index];
+    console.log("slide:", slide);
+
+    if (!slide) return;
+
+    const content = slide.querySelector(".exp__slideContent");
+    console.log("content:", content);
+
+    if (content) {
+      console.log("Before scrollTop:", content.scrollTop);
+      content.scrollTo({ top: 0, behavior: "smooth" });
+      console.log("After scrollTop:", content.scrollTop);
+    }
+  };
+
+  // 카드 내외 상하 스크롤링 전환 빠르게
+  useEffect(() => {
+      // 카드 전환 시 실행
+      const timer = setTimeout(() => {
+        scrollToTopOfSlideContent();
+      }, 0); // 또는 100~300ms로 조정 가능
+
+      return () => clearTimeout(timer);
+    }, [index]);
+
+    useEffect(() => {
+    const slide = slideRefs.current[index];
+    if (!slide) return;
+
+    const content = slide.querySelector(".exp__slideContent");
+    if (!content) return;
+
+    const onWheel = (e) => {
+      const { scrollTop, scrollHeight, clientHeight } = content;
+
+      const isAtTop = scrollTop === 0;
+      const isAtBottom = scrollTop + clientHeight >= scrollHeight;
+
+      if (
+        (e.deltaY < 0 && isAtTop) || // 스크롤 올릴 때 맨 위
+        (e.deltaY > 0 && isAtBottom) // 스크롤 내릴 때 맨 아래
+      ) {
+        // 외부로 스크롤을 전달 (부모로)
+        return;
+      }
+
+      // 내부에서만 처리
+      e.stopPropagation();
+    };
+
+    content.addEventListener("wheel", onWheel, { passive: false });
+
+    return () => content.removeEventListener("wheel", onWheel);
+  }, [index]);
+
+  // ▶ 키보드 좌우 방향키로 카드 넘김
   useEffect(() => {
     const onKey = (e) => {
       const tag = (e.target?.tagName || "").toLowerCase();
@@ -51,7 +110,7 @@ export default function Experience() {
     return () => window.removeEventListener("keydown", onKey);
   }, [items.length]);
 
-  // 터치 스와이프 (가로 방향만 인식)
+  // ▶ 터치 스와이프 (가로 방향만 인식)
   const onTouchStart = (e) => {
     touchStartX.current = e.touches[0].clientX;
     touchStartY.current = e.touches[0].clientY;
@@ -75,48 +134,15 @@ export default function Experience() {
     touchDeltaX.current = 0;
   };
 
-  const [index, setIndex] = useState(0);
-  const [delayedIndex, setDelayedIndex] = useState(index);
-
-  // ▶ 카드 전환 후 로고가 자연스럽게 바뀌도록 딜레이 설정
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setDelayedIndex(index);
-    }, 400); // 카드 전환 트랜지션과 일치하는 시간 (ms 단위)
-
-    return () => clearTimeout(timer);
-  }, [index]);
-
-  // 좋아요 toggle
-  const toggleLike = (jobId) => {
-    setLikes((prev) => {
-      const nextSet = new Set(prev);
-      if (nextSet.has(jobId)) nextSet.delete(jobId);
-      else nextSet.add(jobId);
-      try {
-        localStorage.setItem(LIKE_STORAGE_KEY, JSON.stringify([...nextSet]));
-      } catch {}
-      return nextSet;
-    });
-  };
-
-  const openWebsite = (url) => {
-    if (!url) return;
-    window.open(url, "_blank", "noopener,noreferrer");
-  };
-
-  // 검색 기능
-  const [query, setQuery] = useState("");
-  const [searchProgress, setSearchProgress] = useState({});
-
+  // ▶ 검색 기능
   const findAllMatchIndices = (q) => {
     const needle = q.trim().toLowerCase();
     if (!needle) return [];
     const indices = [];
     items.forEach((job, i) => {
       const bag = [
-        job.company,
         job.title,
+        job.company,
         job.location,
         ...(job.bullets || []),
         ...(job.tech || []),
@@ -138,6 +164,25 @@ export default function Experience() {
     const nextIdx = matches.find((idx) => idx > last) ?? matches[0];
     setIndex(nextIdx);
     setSearchProgress((prev) => ({ ...prev, [q]: nextIdx }));
+  };
+
+  // ▶ 좋아요 toggle
+  const toggleLike = (jobId) => {
+    setLikes((prev) => {
+      const nextSet = new Set(prev);
+      if (nextSet.has(jobId)) nextSet.delete(jobId);
+      else nextSet.add(jobId);
+      try {
+        localStorage.setItem(LIKE_STORAGE_KEY, JSON.stringify([...nextSet]));
+      } catch {}
+      return nextSet;
+    });
+  };
+
+  // ▶ 외부 링크 열기
+  const openWebsite = (url) => {
+    if (!url) return;
+    window.open(url, "_blank", "noopener,noreferrer");
   };
 
   return (
@@ -186,67 +231,65 @@ export default function Experience() {
               aria-label="Experience cards"
             >
               {items.map((job, i) => (
-                <article
-                  className="exp__slide"
-                  key={job.id}
-                  aria-hidden={index !== i}
-                >
-                  <header className="exp__slideHeader">
-                    <div className="exp__heading">
-                      <div className="exp__badge">
-                        <div className="exp__role">{job.title}</div>
-                        <div className="exp__company">[ {job.company} ]</div>
-                      </div>
-                      <div className="exp__meta">
-                        <span>{job.period}</span>
-                        <span className="exp__dot">•</span>
-                        <span>{job.location}</span>
-                      </div>
-                    </div>
-                  </header>
-
-                  <ul className="exp__bullets">
-                    {job.bullets.map((b, idx) => (
-                      <li key={idx}>{b}</li>
-                    ))}
-                  </ul>
-
-                  {(job.kpis?.length || job.tech?.length) && (
-                    <footer className="exp__footer">
-                      {job.kpis?.length > 0 && (
-                        <div className="exp__kpis">
-                          {job.kpis.map((k, idx) => (
-                            <div className="exp__kpi" key={idx}>
-                              <span className="exp__kpiLabel">{k.label}</span>
-                              <span className="exp__kpiValue">{k.value}</span>
-                            </div>
-                          ))}
+                <article className="exp__slide"
+                 ref={(el) => (slideRefs.current[i] = el)}>
+                  <div className="exp__slideContent">
+                    <header className="exp__slideHeader">
+                      <div className="exp__heading">
+                        <div className="exp__badge">
+                          <div className="exp__role">{job.title}</div>
+                          <div className="exp__company">[ {job.company} ]</div>
                         </div>
-                      )}
-                      {job.tech?.length > 0 && (
-                        <ul className="exp__tech">
-                          {job.tech.map((t, idx) => (
+                        <div className="exp__meta">
+                          <div>{job.period}</div>
+                          <div>{job.location}</div>
+                        </div>
+                      </div>
+                    </header>
+                    
+                    {(job.kpis?.length || job.tech?.length) && (
+                      <footer className="exp__footer">
+                        {job.kpis?.length > 0 && (
+                          <div className="exp__kpis">
+                            {job.kpis.map((k, idx) => (
+                              <div className="exp__kpi" key={idx}>
+                                <span className="exp__kpiLabel">{k.label}</span>
+                                <span className="exp__kpiValue">{k.value}</span>
+                              </div>
+                            ))}
+                          </div>
+                        )}
+                        {job.tech?.length > 0 && (
+                          <ul className="exp__tech">
+                            {job.tech.map((t, idx) =>
                             <li key={idx} className="exp__chip">
                               {t}
-                            </li>
-                          ))}
-                        </ul>
-                      )}
-                    </footer>
-                  )}
-                  <div className="exp__sideBrand mobile">
-                    {items[delayedIndex]?.logo && (
-                      <>
-                        <img
-                          src={items[delayedIndex].logo}
-                          alt=""
-                          className="exp__sideBrandImg"
-                          onClick={() => openWebsite(items[delayedIndex].website)}
-                          style={{ cursor: "pointer" }}
-                        />
-                        <div className="exp__visitText">Click to visit website</div>
-                      </>
+                            </li>)}
+                          </ul>
+                        )}
+                      </footer>
                     )}
+
+                    <ul className="exp__bullets">
+                      {job.bullets.map((b, idx) => (
+                        <li key={idx}>{b}</li>
+                      ))}
+                    </ul>
+
+                    <div className="exp__sideBrand mobile">
+                      {job.logo && (
+                        <>
+                          <img
+                            src={job.logo}
+                            alt=""
+                            className="exp__sideBrandImg"
+                            onClick={() => openWebsite(job.website)}
+                            style={{ cursor: "pointer" }}
+                          />
+                          <div className="exp__visitText">⬆︎ Click to visit website</div>
+                        </>
+                      )}
+                    </div>
                   </div>
                 </article>
               ))}

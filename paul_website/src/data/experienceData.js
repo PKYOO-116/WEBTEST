@@ -64,7 +64,7 @@ export const experienceData = [
     id: "rokaf",
     company: "Republic of Korea Air Force",
     logo: logoROKAF,
-    title: "Military Police Staff Sergeant",
+    title: "Military Police Sergeant",
     period: "2017.07 – 2019.06 (2y)",
     location: "South Korea",
     website: "https://www.airforce.mil.kr/user/indexMain.action?command=&siteId=airforce-eng",
