@@ -159,17 +159,24 @@ export default function Experience() {
   const onTouchMove = (e) => {
     const dx = e.touches[0].clientX - touchStartX.current;
     const dy = e.touches[0].clientY - touchStartY.current;
-
-    if (Math.abs(dx) > Math.abs(dy)) {
-      e.preventDefault(); // ← 수평 스크롤로 고정
-      touchDeltaX.current = dx;
-    }
+    if (Math.abs(dy) > Math.abs(dx)) return; // 세로 스크롤이면 무시
+    touchDeltaX.current = dx;
   };
 
   const onTouchEnd = () => {
+    console.log("Touch deltaX:", touchDeltaX.current);
+    console.log("Index before:", index);
+
     const threshold = 10;
-    if (touchDeltaX.current > threshold) prev();
-    else if (touchDeltaX.current < -threshold) next();
+    if (touchDeltaX.current > threshold) {
+      prev();
+      console.log("Moved to previous");
+    } else if (touchDeltaX.current < -threshold) {
+      next();
+      console.log("Moved to next");
+    }
+
+    console.log("Index after:", index);
 
     touchStartX.current = 0;
     touchStartY.current = 0;
