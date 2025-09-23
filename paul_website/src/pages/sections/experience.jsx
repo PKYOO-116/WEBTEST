@@ -51,45 +51,98 @@ export default function Experience() {
     }
   };
 
-  // 카드 내외 상하 스크롤링 전환 빠르게
   useEffect(() => {
-      // 카드 전환 시 실행
-      const timer = setTimeout(() => {
-        scrollToTopOfSlideContent();
-      }, 0); // 또는 100~300ms로 조정 가능
+    // 1. 카드 전환 시 맨 위로 스크롤하는 기능
+    // 휠 이벤트 리스너가 안정적으로 붙은 후 실행되도록 약간의 딜레이(100ms)를 줍니다.
+    const timer = setTimeout(() => {
+      scrollToTopOfSlideContent();
+    }, 100);
 
-      return () => clearTimeout(timer);
-    }, [index]);
-
-    useEffect(() => {
+    // 2. 휠 이벤트(스크롤) 처리 기능
     const slide = slideRefs.current[index];
-    if (!slide) return;
+    const content = slide?.querySelector(".exp__slideContent");
 
-    const content = slide.querySelector(".exp__slideContent");
-    if (!content) return;
+    // content가 없으면 아무것도 하지 않고 타이머만 정리합니다.
+    if (!content) {
+      return () => clearTimeout(timer);
+    }
 
     const onWheel = (e) => {
-      const { scrollTop, scrollHeight, clientHeight } = content;
+      const { deltaX, deltaY } = e;
 
-      const isAtTop = scrollTop === 0;
-      const isAtBottom = scrollTop + clientHeight >= scrollHeight;
-
-      if (
-        (e.deltaY < 0 && isAtTop) || // 스크롤 올릴 때 맨 위
-        (e.deltaY > 0 && isAtBottom) // 스크롤 내릴 때 맨 아래
-      ) {
-        // 외부로 스크롤을 전달 (부모로)
+      // 2-1. 좌우 스크롤(마우스 휠 가로)로 카드 넘김
+      if (Math.abs(deltaX) > Math.abs(deltaY)) {
+        if (deltaX > 10) next();
+        else if (deltaX < -10) prev();
+        e.preventDefault();
         return;
       }
 
-      // 내부에서만 처리
+      // 2-2. 상하 스크롤 경계 처리
+      const { scrollTop, scrollHeight, clientHeight } = content;
+      const isAtTop = scrollTop === 0;
+      const isAtBottom = Math.ceil(scrollTop + clientHeight) >= scrollHeight;
+
+      if (
+        (deltaY < 0 && isAtTop) || 
+        (deltaY > 0 && isAtBottom)
+      ) {
+        // 외부로 스크롤 전파
+        return;
+      }
+      
+      // 그 외의 모든 상하 스크롤은 내부에서만 작동 (외부 스크롤 방지)
       e.stopPropagation();
     };
 
     content.addEventListener("wheel", onWheel, { passive: false });
 
-    return () => content.removeEventListener("wheel", onWheel);
-  }, [index]);
+    // 3. cleanup 함수: 타이머와 이벤트 리스너를 한번에 모두 정리
+    return () => {
+      clearTimeout(timer);
+      content.removeEventListener("wheel", onWheel);
+    };
+  }, [index]); // 이 모든 로직은 index가 변경될 때마다 실행됩니다.
+
+  // // 카드 내외 상하 스크롤링 전환 빠르게
+  // useEffect(() => {
+  //     // 카드 전환 시 실행
+  //     const timer = setTimeout(() => {
+  //       scrollToTopOfSlideContent();
+  //     }, 0); // 또는 100~300ms로 조정 가능
+
+  //     return () => clearTimeout(timer);
+  //   }, [index]);
+
+  //   useEffect(() => {
+  //   const slide = slideRefs.current[index];
+  //   if (!slide) return;
+
+  //   const content = slide.querySelector(".exp__slideContent");
+  //   if (!content) return;
+
+  //   const onWheel = (e) => {
+  //     const { scrollTop, scrollHeight, clientHeight } = content;
+
+  //     const isAtTop = scrollTop === 0;
+  //     const isAtBottom = scrollTop + clientHeight >= scrollHeight;
+
+  //     if (
+  //       (e.deltaY < 0 && isAtTop) || // 스크롤 올릴 때 맨 위
+  //       (e.deltaY > 0 && isAtBottom) // 스크롤 내릴 때 맨 아래
+  //     ) {
+  //       // 외부로 스크롤을 전달 (부모로)
+  //       return;
+  //     }
+
+  //     // 내부에서만 처리
+  //     e.stopPropagation();
+  //   };
+
+  //   content.addEventListener("wheel", onWheel, { passive: false });
+
+  //   return () => content.removeEventListener("wheel", onWheel);
+  // }, [index]);
 
   // ▶ 키보드 좌우 방향키로 카드 넘김
   useEffect(() => {
@@ -110,44 +163,44 @@ export default function Experience() {
     return () => window.removeEventListener("keydown", onKey);
   }, [items.length]);
 
-  // 카드 좌우 스크롤
-  useEffect(() => {
-    const slide = slideRefs.current[index];
-    if (!slide) return;
+  // // 카드 좌우 스크롤
+  // useEffect(() => {
+  //   const slide = slideRefs.current[index];
+  //   if (!slide) return;
 
-    const content = slide.querySelector(".exp__slideContent");
-    if (!content) return;
+  //   const content = slide.querySelector(".exp__slideContent");
+  //   if (!content) return;
 
-    const onWheel = (e) => {
-      const { deltaX, deltaY } = e;
+  //   const onWheel = (e) => {
+  //     const { deltaX, deltaY } = e;
 
-      // 1. 좌우 스크롤 감지
-      if (Math.abs(deltaX) > Math.abs(deltaY)) {
-        if (deltaX > 10) next();     // 오른쪽으로 스크롤 → 다음 카드
-        else if (deltaX < -10) prev(); // 왼쪽으로 스크롤 → 이전 카드
-        e.preventDefault(); // 브라우저 기본 동작 방지
-      }
+  //     // 1. 좌우 스크롤 감지
+  //     if (Math.abs(deltaX) > Math.abs(deltaY)) {
+  //       if (deltaX > 10) next();     // 오른쪽으로 스크롤 → 다음 카드
+  //       else if (deltaX < -10) prev(); // 왼쪽으로 스크롤 → 이전 카드
+  //       e.preventDefault(); // 브라우저 기본 동작 방지
+  //     }
 
-      // 2. 위아래 스크롤 시 외부 전파 방지
-      const { scrollTop, scrollHeight, clientHeight } = content;
-      const atTop = scrollTop === 0;
-      const atBottom = scrollTop + clientHeight >= scrollHeight;
+  //     // 2. 위아래 스크롤 시 외부 전파 방지
+  //     const { scrollTop, scrollHeight, clientHeight } = content;
+  //     const atTop = scrollTop === 0;
+  //     const atBottom = scrollTop + clientHeight >= scrollHeight;
 
-      if (
-        (deltaY < 0 && atTop) ||
-        (deltaY > 0 && atBottom)
-      ) {
-        // 외부로 넘김
-        return;
-      }
+  //     if (
+  //       (deltaY < 0 && atTop) ||
+  //       (deltaY > 0 && atBottom)
+  //     ) {
+  //       // 외부로 넘김
+  //       return;
+  //     }
 
-      e.stopPropagation();
-    };
+  //     e.stopPropagation();
+  //   };
 
-    content.addEventListener("wheel", onWheel, { passive: false });
+  //   content.addEventListener("wheel", onWheel, { passive: false });
 
-    return () => content.removeEventListener("wheel", onWheel);
-  }, [index]);
+  //   return () => content.removeEventListener("wheel", onWheel);
+  // }, [index]);
 
   // ▶ 터치 스와이프 (가로 방향만 인식)
   const onTouchStart = (e) => {
@@ -159,14 +212,7 @@ export default function Experience() {
   const onTouchMove = (e) => {
     const dx = e.touches[0].clientX - touchStartX.current;
     const dy = e.touches[0].clientY - touchStartY.current;
-
-    // 세로 스크롤이 확실하면 아무것도 하지 않음
-    if (Math.abs(dy) > Math.abs(dx)) {
-      return;
-    }
-    
-    // 가로 스크롤이 시작되면, 브라우저의 세로 스크롤 기능을 막음
-    e.preventDefault();
+    if (Math.abs(dy) > Math.abs(dx)) return;
     touchDeltaX.current = dx;
   };
 
