@@ -159,7 +159,14 @@ export default function Experience() {
   const onTouchMove = (e) => {
     const dx = e.touches[0].clientX - touchStartX.current;
     const dy = e.touches[0].clientY - touchStartY.current;
-    if (Math.abs(dy) > Math.abs(dx)) return; // 세로 스크롤이면 무시
+
+    // 세로 스크롤이 확실하면 아무것도 하지 않음
+    if (Math.abs(dy) > Math.abs(dx)) {
+      return;
+    }
+    
+    // 가로 스크롤이 시작되면, 브라우저의 세로 스크롤 기능을 막음
+    e.preventDefault();
     touchDeltaX.current = dx;
   };
 
