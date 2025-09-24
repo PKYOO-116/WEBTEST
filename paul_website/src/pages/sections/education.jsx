@@ -1,7 +1,7 @@
 import { Typewriter } from "react-simple-typewriter";
 import { logoUSC, logoMSU } from "../../assets";
 
-export default function EducationSection() {
+export default function Education() {
   return (
     <section className="education whoSec" id="education">
       <div className="container">

@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, useLayoutEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import { viewsIcon, heartIcon, arrowLeft, arrowRight } from "../../assets";
 import { experienceData } from "../../data/experienceData";
 import { Typewriter } from "react-simple-typewriter";
@@ -106,6 +106,45 @@ export default function Experience() {
     window.addEventListener("keydown", onKey, { passive: false });
     return () => window.removeEventListener("keydown", onKey);
   }, [items.length]);
+
+  // 카드 좌우 스크롤
+  useEffect(() => {
+    const slide = slideRefs.current[index];
+    if (!slide) return;
+
+    const content = slide.querySelector(".exp__slideContent");
+    if (!content) return;
+
+    const onWheel = (e) => {
+      const { deltaX, deltaY } = e;
+
+      // 1. 좌우 스크롤 감지
+      if (Math.abs(deltaX) > Math.abs(deltaY)) {
+        if (deltaX > 10) next();     // 오른쪽으로 스크롤 → 다음 카드
+        else if (deltaX < -10) prev(); // 왼쪽으로 스크롤 → 이전 카드
+        e.preventDefault(); // 브라우저 기본 동작 방지
+      }
+
+      // 2. 위아래 스크롤 시 외부 전파 방지
+      const { scrollTop, scrollHeight, clientHeight } = content;
+      const atTop = scrollTop === 0;
+      const atBottom = scrollTop + clientHeight >= scrollHeight;
+
+      if (
+        (deltaY < 0 && atTop) ||
+        (deltaY > 0 && atBottom)
+      ) {
+        // 외부로 넘김
+        return;
+      }
+
+      e.stopPropagation();
+    };
+
+    content.addEventListener("wheel", onWheel, { passive: false });
+
+    return () => content.removeEventListener("wheel", onWheel);
+  }, [index]);
 
   // ▶ 검색 기능
   const findAllMatchIndices = (q) => {
