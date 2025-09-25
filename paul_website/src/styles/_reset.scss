@@ -1,4 +1,4 @@
-@use "./foundation" as *;
+@use "./foundation" as f;
 
 *,
 *::before,
@@ -8,9 +8,9 @@ html, body, #root { height: 100%; }
 
 body {
   margin: 0;
-  background: $black;
-  color: $white;
-  font-family: $font-base;
+  background: rgba(f.$darkBlue, 0.98);
+  color: f.$white;
+  font-family: f.$font-base;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   text-rendering: optimizeLegibility;
@@ -25,6 +25,11 @@ body {
   &::-webkit-scrollbar-thumb {
     background: transparent;
   }
+}
+
+h1, h2 {
+  font-family: f.$font-title;
+  font-weight: 400;
 }
 
 a { color: inherit; text-decoration: none; }

@@ -14,7 +14,7 @@ export default function ContactList() {
                 target="_blank"
                 rel="noreferrer"
             >
-                Linked In
+                LinkedIn
             </a>
         </li>
         <li>
@@ -24,7 +24,17 @@ export default function ContactList() {
                 target="_blank"
                 rel="noreferrer"
             >
-                GitHub
+                Project Github
+            </a>
+        </li>
+        <li>
+            <img src={icGitHub} alt="GitHub" />
+            <a
+                href="https://github.com/PKYOO-Adv"
+                target="_blank"
+                rel="noreferrer"
+            >
+                Study Github
             </a>
         </li>
         <li>

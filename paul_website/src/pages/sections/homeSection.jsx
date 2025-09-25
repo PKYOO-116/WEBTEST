@@ -24,7 +24,7 @@ export default function HomeSection() {
                 <li>Tech Project Manager</li>
               </ul>
 
-              <div className="home__contacts mobile">
+              <div className="home__contacts mobile tablet">
                 <ContactList />
               </div>
             </div>
@@ -34,15 +34,11 @@ export default function HomeSection() {
         <div className="grid grid-6"></div>
         <div className="grid grid-7"></div>
         <div className="grid grid-8">
-          <div className="home__contacts tablet">
+          <div className="home__contacts laptop desktop">
             <ContactList />
           </div>
         </div>
-        <div className="grid grid-9">
-          <div className="home__contacts desktop">
-            <ContactList />
-          </div>
-        </div>
+        <div className="grid grid-9"></div>
       </div>
     </section>
   );

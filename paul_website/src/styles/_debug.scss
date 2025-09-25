@@ -1,119 +1,126 @@
-// // // /* 모든 공통 섹션 */
-// // // section {
-// // //   border: 2px dashed red;
-// // // }
+// // // // // /* 모든 공통 섹션 */
+// // // // // section {
+// // // // //   border: 2px dashed red;
+// // // // // }
 // // .container {
 // //   border: 2px solid skyblue;
 // // }
-// .grid {
-//   border: 2px dashed orange;
+// // .grid {
+// //   border: 2px dashed orange;
+// // }
+
+// // // // // /* MenuBar */
+// // // // // // .nav {
+// // // // // //   border: 2px dashed yellow;
+// // // // // // }
+// // // // // // .nav__list {
+// // // // // //   border: 2px solid purple;
+// // // // // // }
+// // // // // // .nav__item {
+// // // // // //   border: 2px dashed green;
+// // // // // // }
+
+// /* Home */
+// // .grid-5 {
+// //   border: 2px dashed blue;
+// // }
+// .home__grid {
+//   border: 2px solid greenyellow;
+// }
+// .home__left {
+//   border: 2px solid orange;
+// }
+// .home__right {
+//   border: 2px solid green;
 // }
 
-// // // /* MenuBar */
-// // // // .nav {
-// // // //   border: 2px dashed yellow;
-// // // // }
-// // // // .nav__list {
-// // // //   border: 2px solid purple;
-// // // // }
-// // // // .nav__item {
-// // // //   border: 2px dashed green;
-// // // // }
+// .grid-8 {
+//   border: 2px dashed skyblue;
+// }
+// .home__contacts {
+//   border: 2px solid yellow;
 
-// // // /* Home */
-// // // // .home__grid {
+//   ul {
+//     border: 2px solid blue;
+//   }
+//   li {
+//     border: 2px solid green;
+//   }
+// }
+
+// // // // // /* Who Am I */
+// // // // //   /* Sections */
+// // // // // // .pkyoo {
+// // // // // //   border: 2px solid blue;
+// // // // // // }
+// // // // // // .education {
+// // // // // //   border: 2px solid rgb(186, 186, 186);
+// // // // // // }
+// // // // // // .experience {
+// // // // // //   border: 2px solid rgb(34, 0, 255);
+// // // // // // }
+// // // // // // .community {
+// // // // // //   border: 2px solid purple;
+// // // // // // }
+// // // // // // .skills {
+// // // // // //   border: 2px solid cyan;
+// // // // // // }
+
+// // // // //   /* Education */
+// // // // // // .edu__stage {
+// // // // // //   border: 2px solid cyan;
+// // // // // // }
+// // // // // // .edu__item {
+// // // // // //   border: 2px solid saddlebrown;
+// // // // // // }
+
+// // // //   /* Experience */
+// // // // /* Viewport 박스 */
+// // // // // .grid-1 {
+// // // // //   border: 2px solid yellow
+// // // // // }
+
+// // // // .grid-5 {
 // // // //   border: 2px solid greenyellow;
 // // // // }
-// // // // .home__left {
-// // // //   border: 2px solid orange;
-// // // // }
-// // // // .home__right {
-// // // //   border: 2px solid green;
-// // // // }
-// // // // .home__contacts {
-// // // //   border: 2px solid green;
 
-// // // //   ul {
-// // // //     border: 2px solid green;
-// // // //   }
-// // // //   li {
-// // // //     border: 2px solid green;
-// // // //   }
+// // // // .exp__searchRow {
+// // // //   border: 2px solid cyan;
 // // // // }
-
-// // // /* Who Am I */
-// // //   /* Sections */
-// // // // .pkyoo {
-// // // //   border: 2px solid blue;
+// // // // .exp__viewport {
+// // // //   border: 2px solid red;
 // // // // }
-// // // // .education {
-// // // //   border: 2px solid rgb(186, 186, 186);
-// // // // }
-// // // // .experience {
-// // // //   border: 2px solid rgb(34, 0, 255);
-// // // // }
-// // // // .community {
+// // // // .exp__track {
 // // // //   border: 2px solid purple;
 // // // // }
-// // // // .skills {
-// // // //   border: 2px solid cyan;
+// // // // .exp__slide {
+// // // //   border: 2px solid purple;
+// // // // }
+// // // // .exp__meta {
+// // // //   border: 2px solid white;
+// // // // }
+// // // // .mobile {
+// // // //   border: 2px solid orange
 // // // // }
 
-// // //   /* Education */
-// // // // .edu__stage {
-// // // //   border: 2px solid cyan;
+// // // // .exp__viewportBar {
+// // // //   border: 2px dashed blueviolet
 // // // // }
-// // // // .edu__item {
-// // // //   border: 2px solid saddlebrown;
+// // // // .exp__dots {
+// // // //     border: 2px solid sandybrown;
 // // // // }
-
-// //   /* Experience */
-// // /* Viewport 박스 */
-// // // .grid-1 {
-// // //   border: 2px solid yellow
-// // // }
-
-// // .grid-5 {
-// //   border: 2px solid greenyellow;
-// // }
-
-// // .exp__searchRow {
-// //   border: 2px solid cyan;
-// // }
-// // .exp__viewport {
-// //   border: 2px solid red;
-// // }
-// // .exp__track {
-// //   border: 2px solid purple;
-// // }
-// // .exp__slide {
-// //   border: 2px solid purple;
-// // }
-// // .exp__meta {
-// //   border: 2px solid white;
-// // }
-// // .mobile {
-// //   border: 2px solid orange
-// // }
-
-// // .exp__viewportBar {
-// //   border: 2px dashed blueviolet
-// // }
-// // .exp__dots {
-// //     border: 2px solid sandybrown;
-// // }
-// // .exp__actions {
-// //     border: 2px solid pink;
-// // }
-// // .exp__viewport { background: rgba(0, 255, 0, 0.1); }
+// // // // .exp__actions {
+// // // //     border: 2px solid pink;
+// // // // }
+// // // // .exp__viewport { background: rgba(0, 255, 0, 0.1); }
 
 
-// // .grid-6 {
-// //   border: 2px solid blue;
-// // }
-// // .exp__sideBrand {
-// //   border: 5px solid pink;
-// // }
-// // .exp__visitText.desktop {
-// //   border: 2px solid green
-// // }
+// // // // .grid-6 {
+// // // //   border: 2px solid blue;
+// // // // }
+// // // // .exp__sideBrand {
+// // // //   border: 5px solid pink;
+// // // // }
+// // // // .exp__visitText.desktop {
+// // // //   border: 2px solid green
+// // // // }

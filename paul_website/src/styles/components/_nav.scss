@@ -14,7 +14,6 @@
   z-index: 1000;
   border-bottom: 1px solid f.$border;
   background: f.$darkBlue;
-  font-family: f.$font-base;
 
   mask-image: linear-gradient(
     to right,
@@ -23,7 +22,6 @@
     f.$darkBlue calc(100% - 24px),
     transparent 100%
   );
-  font-family: f.$font-base;
 }
 
 .nav__wrap {
@@ -62,26 +60,19 @@
   scrollbar-width: none;
 }
 
-// 개별 메뉴 아이템
 .nav__item {
   position: relative;
   display: inline-flex;
   align-items: center;
-  padding: 6px 12px;
+  padding: 3px 12px;
   border-radius: 10px;
   color: rgba(f.$white, 0.9);
   text-decoration: none;
   transition: background 0.2s ease;
-  font: 700 14px f.$font-base;
+  font: 900 12px f.$font-nav;
   white-space: nowrap;
 
-  &:hover {
-    background: rgba(f.$exp-tech, 0.15);
-  }
-
   &.nav__item--active {
-    background: rgba(f.$exp-tech, 0.15);
-
     &::after {
       content: "";
       position: absolute;
@@ -102,66 +93,62 @@
   }
 
   .nav__wrap {
-    padding: 0 clamp(60px, 1vw, 120px);
+    padding-left: 40px;
     gap: 25px;
-  }
-
-  .nav__logo {
-    width: 40px;
   }
 
   .nav__list {
-    gap: 25px;
+    gap: 15px;
   }
 
   .nav__item {
-    padding: 8px 15px;
-    font-size: 16px; // 폰트 크기 변경
+    padding: 3px 14px;
+    font-size: 15px;
   }
 }
 
-/* Desktop ------------------------------------------------------------------------------------------------*/
-@include f.respond-to(desktop) {
+/* Laptop ------------------------------------------------------------------------------------------------*/
+@include f.respond-to(laptop) {
   :root {
     --nav-h: 64px !important;
   }
 
   .nav__wrap {
-    padding-left: clamp(40px, 3vw, 60px);
+    padding-left: 80px;
     gap: 40px;
   }
 
-  .nav__logo {
-    width: 50px;
-  }
-
   .nav__item {
-    padding: 8px 12px;
-    font-size: 18px; // 폰트 크기 변경
+    padding: 4px 16px;
+    font-size: 20px;
+
+    &:hover {
+      background: rgba(f.$white, 0.03);
+    }
   }
 }
 
 /* LargeDesktop ------------------------------------------------------------------------------------------------*/
-@include f.respond-to(large-desktop) {
+@include f.respond-to(desktop) {
   :root {
     --nav-h: clamp(72px, 6.6vh, 108px) !important;
   }
   
   .nav__wrap {
-    padding: 0 clamp(60px, 3vw, 120px);
-    gap: clamp(30px, 2vw, 60px);
-  }
-
-  .nav__logo {
-    width: clamp(54px, 4vw, 70px);
+    padding: 0 clamp(80px, 6.25vw, 240px);
+    gap: clamp(30px, 3vw, 120px);
   }
 
   .nav__list {
-    gap: clamp(30px, 2vw, 60px);
+    gap: clamp(30px, 3vw, 120px);
   }
 
   .nav__item {
-    padding: clamp(8px, 0.7vh, 16px) clamp(12px, 1.1vh, 24px);
-    font-size: clamp(18px, 1.2vw, 22px);
+    padding: 6px clamp(12px, 1.1vh, 24px);
+    font-size: clamp(22px, 1.2vw, 30px);
+
+    &:hover {
+      background: rgba(f.$white, 0.03);
+    }
   }
 }

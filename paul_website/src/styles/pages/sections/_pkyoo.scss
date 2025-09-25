@@ -2,10 +2,14 @@
 
 /* Mobile ------------------------------------------------------------------ */
 .pkyoo {
+  height: 100vh;
+  
   .container {
     display: grid;
     grid-template-columns: 1fr auto 1fr;
     grid-template-rows: 1fr 1fr 1fr;
+    height: 100%;
+    padding: 0;
 
     .grid-5 {
       grid-column: 2;
@@ -28,7 +32,19 @@
     .container {
       .grid-5 {
         .pkyoo__title {
-          font-size: 50px;
+          font-size: 45px;
+        }
+      }
+    }
+  }
+}
+/* Laptop --------------------------------------------------------------------------------------------------------------------------------- */
+@include f.respond-to(laptop) {
+  .pkyoo {
+    .container {
+      .grid-5 {
+        .pkyoo__title {
+          font-size: 75px;
         }
       }
     }
@@ -36,18 +52,6 @@
 }
 /* Desktop --------------------------------------------------------------------------------------------------------------------------------- */
 @include f.respond-to(desktop) {
-  .pkyoo {
-    .container {
-      .grid-5 {
-        .pkyoo__title {
-          font-size: 95px;
-        }
-      }
-    }
-  }
-}
-/* LargeDesktop --------------------------------------------------------------------------------------------------------------------------------- */
-@include f.respond-to(large-desktop) {
   .pkyoo {
     .container {
       .grid-5 {
