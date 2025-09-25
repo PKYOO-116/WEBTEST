@@ -1,5 +1,6 @@
-// ===== Photos =====
+// ===== Profile =====
 import profileImg from "./pics/Home/pkyoo.jpeg";
+import profileLogo from "./logos/pkyoo_logo.png"
 
 // ===== Logos =====
 import icLinkedIn from "./logos/LI-In-Bug.png";
@@ -42,11 +43,11 @@ import imgDSCI551_ppt from "./pics/Projects/551_ppt.png";
 import imgDSCI551_web from "./pics/Projects/551_web.png";
 
 import imgDSCI554_report from "./pics/Projects/554_report.png";
-import imgDSCI554_slide9 from "./pics/Projects/TrojansWith...age_09.png";
-import imgDSCI554_slide10 from "./pics/Projects/TrojansWith...age_10.png";
+import imgDSCI554_slide9 from "./pics/Projects/554_front.png";
+import imgDSCI554_slide10 from "./pics/Projects/554_web.png";
 
-import imgEXCELLO from "./pics/Projects/5abae5c4c716e.png";
-import imgEXCELLO_2 from "./pics/Projects/image 3.png";
+import imgEXCELLO from "./pics/Projects/burner.png";
+import imgEXCELLO_2 from "./pics/Projects/arcFurnace.png";
 
 
 // Leadership logos & photos
@@ -64,10 +65,41 @@ import logoFirebase from "./logos/Firebase-logo-vertical.png";
 import logoReact from "./logos/React_black.png";
 import logoGit from "./logos/Git.png";
 
+// ===== Daily =====
+import dailyPhoto1 from "./pics/Daily/1.JPG";
+import dailyPhoto2 from "./pics/Daily/2.JPG";
+import dailyPhoto3 from "./pics/Daily/3.JPG";
+import dailyPhoto4 from "./pics/Daily/4.JPG";
+import dailyPhoto5 from "./pics/Daily/5.JPG";
+import dailyPhoto6 from "./pics/Daily/6.JPG";
+import dailyPhoto7 from "./pics/Daily/7.jpeg";
+import dailyPhoto8 from "./pics/Daily/8.JPG";
+import dailyPhoto9 from "./pics/Daily/9.JPG";
+import dailyPhoto10 from "./pics/Daily/10.jpg";
+import dailyPhoto11 from "./pics/Daily/11.jpg";
+import dailyPhoto12 from "./pics/Daily/12.jpg";
+import dailyPhoto13 from "./pics/Daily/13.JPG";
+import dailyPhoto14 from "./pics/Daily/14.JPG";
+import dailyPhoto15 from "./pics/Daily/15.jpg";
+import dailyPhoto16 from "./pics/Daily/16.jpg";
+import dailyPhoto17 from "./pics/Daily/17.jpg";
+import dailyPhoto18 from "./pics/Daily/18.jpg";
+import dailyPhoto19 from "./pics/Daily/19.jpg";
+import dailyPhoto20 from "./pics/Daily/20.jpg";
+import dailyPhoto21 from "./pics/Daily/21.jpg";
+import dailyPhoto22 from "./pics/Daily/22.jpg";
+import dailyPhoto23 from "./pics/Daily/23.JPG";
+import dailyPhoto24 from "./pics/Daily/24.jpg";
+import dailyPhoto25 from "./pics/Daily/25.jpg";
+import dailyPhoto26 from "./pics/Daily/26.jpg";
+import dailyPhoto27 from "./pics/Daily/27.jpg";
+
+
 // Export all in one object
 
 export {
   profileImg,
+  profileLogo,
   icLinkedIn,
   icGitHub,
   icEmail,
@@ -111,7 +143,34 @@ export {
   imgDSCI554_slide9,
   imgDSCI554_slide10,
   imgEXCELLO,
-  imgEXCELLO_2
+  imgEXCELLO_2,
+  dailyPhoto1,
+  dailyPhoto2,
+  dailyPhoto3,
+  dailyPhoto4,
+  dailyPhoto5,
+  dailyPhoto6,
+  dailyPhoto7,
+  dailyPhoto8,
+  dailyPhoto9,
+  dailyPhoto10,
+  dailyPhoto11,
+  dailyPhoto12,
+  dailyPhoto13,
+  dailyPhoto14,
+  dailyPhoto15,
+  dailyPhoto16,
+  dailyPhoto17,
+  dailyPhoto18,
+  dailyPhoto19,
+  dailyPhoto20,
+  dailyPhoto21,
+  dailyPhoto22,
+  dailyPhoto23,
+  dailyPhoto24,
+  dailyPhoto25,
+  dailyPhoto26,
+  dailyPhoto27
 };
 
 

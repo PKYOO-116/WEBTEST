@@ -1,11 +1,11 @@
 @use "../foundation" as f;
 
-/* Base (Mobile First) ------------------------------------------------------------------------------------------------*/
+/* Mobile ------------------------------------------------------------------------------------------------*/
 :root {
   --nav-h: 48px;
 }
 
-nav {
+.nav {
   position: fixed;
   top: 0;
   left: 0;
@@ -13,32 +13,56 @@ nav {
   height: var(--nav-h);
   z-index: 1000;
   border-bottom: 1px solid f.$border;
-  background: rgba(f.$black, 0.9);
+  background: f.$darkBlue;
+  font-family: f.$font-base;
 
   mask-image: linear-gradient(
     to right,
     transparent 0,
-    f.$black 24px,
-    f.$black calc(100% - 24px),
+    f.$darkBlue 24px,
+    f.$darkBlue calc(100% - 24px),
     transparent 100%
   );
-  font-family: f.$font-base; // 통일 적용
+  font-family: f.$font-base;
+}
+
+.nav__wrap {
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  height: 100%;
+  padding-left: 15px;
+  gap: clamp(5px, 3vw, 40px);
+  margin: 0 auto;
+  overflow-x: hidden;
+}
+
+.nav__logoLink {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.nav__logo {
+  height: calc(var(--nav-h) - 4px);
+  width: auto;
+  object-fit: contain;
 }
 
 .nav__list {
   display: flex;
-  gap: 20px;
-  padding-left: 10svw;
   align-items: center;
-  justify-content: flex-start;
-  overflow-x: hidden;
-  overflow-y: hidden;
+  gap: 5px;
   white-space: nowrap;
-}
-.nav__list::-webkit-scrollbar {
-  display: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
+// 개별 메뉴 아이템
 .nav__item {
   position: relative;
   display: inline-flex;
@@ -50,26 +74,25 @@ nav {
   transition: background 0.2s ease;
   font: 700 14px f.$font-base;
   white-space: nowrap;
-  flex: 0 0 auto;
 
   &:hover {
-    background: #111;
+    background: rgba(f.$exp-tech, 0.15);
   }
-}
 
-.nav__item--active {
-  background: #111;
-}
+  &.nav__item--active {
+    background: rgba(f.$exp-tech, 0.15);
 
-.nav__item--active::after {
-  content: "";
-  position: absolute;
-  left: 8px;
-  right: 8px;
-  bottom: -4px;
-  height: 2px;
-  background: f.$white;
-  border-radius: 2px;
+    &::after {
+      content: "";
+      position: absolute;
+      left: 8px;
+      right: 8px;
+      bottom: -4px;
+      height: 2px;
+      background: f.$white;
+      border-radius: 2px;
+    }
+  }
 }
 
 /* Tablet ------------------------------------------------------------------------------------------------*/
@@ -78,17 +101,22 @@ nav {
     --nav-h: 56px !important;
   }
 
+  .nav__wrap {
+    padding: 0 clamp(60px, 1vw, 120px);
+    gap: 25px;
+  }
+
+  .nav__logo {
+    width: 40px;
+  }
+
   .nav__list {
     gap: 25px;
   }
 
   .nav__item {
     padding: 8px 15px;
-    font-size: 16px;
-  }
-
-  .nav__item--active::after {
-    bottom: -6px;
+    font-size: 16px; // 폰트 크기 변경
   }
 }
 
@@ -98,18 +126,18 @@ nav {
     --nav-h: 64px !important;
   }
 
-  nav {
-    padding-left: clamp(12px, 8vw, 200px);
-    padding-right: 0;
+  .nav__wrap {
+    padding-left: clamp(40px, 3vw, 60px);
+    gap: 40px;
   }
 
-  .nav__list {
-    gap: 30px;
+  .nav__logo {
+    width: 50px;
   }
 
   .nav__item {
     padding: 8px 12px;
-    font-size: 18px;
+    font-size: 18px; // 폰트 크기 변경
   }
 }
 
@@ -118,10 +146,14 @@ nav {
   :root {
     --nav-h: clamp(72px, 6.6vh, 108px) !important;
   }
+  
+  .nav__wrap {
+    padding: 0 clamp(60px, 3vw, 120px);
+    gap: clamp(30px, 2vw, 60px);
+  }
 
-  nav {
-    padding-left: clamp(12px, 8vw, 200px);
-    padding-right: 0;
+  .nav__logo {
+    width: clamp(54px, 4vw, 70px);
   }
 
   .nav__list {
@@ -130,6 +162,6 @@ nav {
 
   .nav__item {
     padding: clamp(8px, 0.7vh, 16px) clamp(12px, 1.1vh, 24px);
-    font-size: clamp(18px, 1.2vw, 40px);
+    font-size: clamp(18px, 1.2vw, 22px);
   }
 }

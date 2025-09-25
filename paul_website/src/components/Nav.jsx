@@ -1,4 +1,5 @@
 import { NavLink } from "react-router-dom";
+import { profileLogo } from "../assets";
 
 export default function Nav() {
   const links = [
@@ -11,6 +12,14 @@ export default function Nav() {
   return (
     <header className="nav">
       <div className="nav__wrap">
+        <NavLink to="/" className="nav__logoLink">
+          <img
+            src={profileLogo}
+            alt="Profile Logo"
+            className="nav__logo"
+          />
+        </NavLink>
+
         <nav className="nav__list">
           {links.map((l) => (
             <NavLink
