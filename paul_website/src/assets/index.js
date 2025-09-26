@@ -1,6 +1,6 @@
 // ===== Profile =====
 import profileImg from "./pics/Home/pkyoo.jpeg";
-import profileLogo from "./logos/pkyoo_logo.png"
+import profileLogo from "./logos/pkyoo_logo.png";
 
 // ===== Logos =====
 import icLinkedIn from "./logos/LI-In-Bug.png";
