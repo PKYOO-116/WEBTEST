@@ -24,17 +24,7 @@ export default function ContactList() {
                 target="_blank"
                 rel="noreferrer"
             >
-                Project Github
-            </a>
-        </li>
-        <li>
-            <img src={icGitHub} alt="GitHub" />
-            <a
-                href="https://github.com/PKYOO-Adv"
-                target="_blank"
-                rel="noreferrer"
-            >
-                Study Github
+                Github
             </a>
         </li>
         <li>
