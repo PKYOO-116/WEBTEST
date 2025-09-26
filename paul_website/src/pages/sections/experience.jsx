@@ -6,6 +6,31 @@ import { Typewriter } from "react-simple-typewriter";
 const LIKE_STORAGE_KEY = "exp_likes_v1";
 
 export default function Experience() {
+  const sectionRef = useRef(null);
+  const [startTyping, setStartTyping] = useState(false);
+  const [key, setKey] = useState(0);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setStartTyping(true);
+          setKey((k) => k + 1)
+        } else {
+          setStartTyping(false);
+        }
+      },
+      {
+        threshold: 0.4,
+      }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+    return () => observer.disconnect();
+  }, []);
+  
   const items = experienceData;
 
   // ▶ 상태 정의 (상단에 먼저 위치)
@@ -198,17 +223,19 @@ export default function Experience() {
   };
 
   return (
-    <section id="experience" className="experience whoSec">
+    <section ref={sectionRef} id="experience" className="experience whoSec">
       <div className="container">
         <div className="grid grid-1">
           <h1 className="exp__title">
-            <Typewriter
-              words={["Experience"]}
-              typeSpeed={50}
-              deleteSpeed={0}
-              delaySpeed={400}
-              cursor
-            />
+            {startTyping && (
+              <Typewriter
+                words={["Experience"]}
+                typeSpeed={50}
+                deleteSpeed={0}
+                delaySpeed={400}
+                cursor
+              />
+            )}
           </h1>
         </div>
         <div className="grid grid-2"></div>

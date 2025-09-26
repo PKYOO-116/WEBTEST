@@ -1,20 +1,48 @@
+import { useEffect, useRef, useState } from "react";
 import { Typewriter } from "react-simple-typewriter";
 import { logoUSC, logoMSU } from "../../assets";
 
 export default function Education() {
+  const sectionRef = useRef(null);
+  const [startTyping, setStartTyping] = useState(false);
+  const [key, setKey] = useState(0);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setStartTyping(true);
+          setKey((k) => k + 1)
+        } else {
+          setStartTyping(false);
+        }
+      },
+      {
+        threshold: 0.4,
+      }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+    return () => observer.disconnect();
+  }, []);
+
   return (
-    <section className="education whoSec" id="education">
+    <section ref={sectionRef} className="education whoSec" id="education">
       <div className="container">
         <div className="grid grid-1">
           <div className="edu_title">
             <h1 className="edu__title">
-              <Typewriter
-                words={["Education"]}
-                typeSpeed={50}
-                deleteSpeed={0}
-                delaySpeed={400}
-                cursor
-              />
+              {startTyping && (
+                <Typewriter
+                  key={key}
+                  words={["Education"]}
+                  typeSpeed={50}
+                  deleteSpeed={0}
+                  delaySpeed={400}
+                />
+              )}
             </h1>
           </div>
         </div>

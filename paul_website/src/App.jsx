@@ -6,6 +6,7 @@ import WhoAmI from "./pages/WhoAmI.jsx";
 import Daily from "./pages/Daily.jsx";
 import Contact from "./pages/Contact.jsx";
 import Nav from "./components/Nav.jsx";
+import ScrollBySpace from "./components/ScrollBySpace.jsx";
 
 export default function App() {
   const location = useLocation();
@@ -18,7 +19,6 @@ export default function App() {
       document.body.style.overflow = "auto";
     }
 
-    // cleanup
     return () => {
       document.body.style.overflow = "auto";
     };
@@ -33,6 +33,8 @@ export default function App() {
         <Route path="/daily" element={<Daily />} />
         <Route path="/contact" element={<Contact />} />
       </Routes>
+
+      <ScrollBySpace />
     </>
   );
 }
