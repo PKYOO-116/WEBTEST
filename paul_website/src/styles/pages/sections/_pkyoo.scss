@@ -3,7 +3,6 @@
 /* Mobile ------------------------------------------------------------------ */
 .pkyoo {
   height: 100vh;
-  overflow-y: auto;
   
   .container {
     display: grid;
@@ -20,10 +19,15 @@
       justify-content: center;
 
       .pkyoo__title {
-        font: 900 27px f.$font-base;
+        font: 500 27px f.$font-base;
         line-height: 1.05;
         letter-spacing: -0.02em;
-        padding-left: 15px
+        padding-left: 15px;
+
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
       }
     }
 

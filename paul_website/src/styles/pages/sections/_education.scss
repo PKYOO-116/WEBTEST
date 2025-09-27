@@ -17,9 +17,14 @@
       justify-content: center;
 
       .edu__title {
-        font:800 35px f.$font-base;
+        font:700 35px f.$font-base;
         margin-bottom: 30px;
         padding-left: 17x;
+
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        -ms-user-select: none;
+        user-select: none;
       }
     }
 
@@ -129,14 +134,15 @@
   }
 }
 
-/* Desktop --------------------------------------------------------------------------------------------------------------------------------- */
-@include f.respond-to(desktop) {
+/* Laptop --------------------------------------------------------------------------------------------------------------------------------- */
+@include f.respond-to(laptop) {
   .education {
     .container {
       grid-template-rows: 15% auto auto;
       .grid-1 {
         .edu__title {
-          font-size: 70px;
+          font-size: 50px;
+          margin-bottom: 30px
         }
       }
 
@@ -146,10 +152,10 @@
         .edu__stage {          
           .edu__item {
             .edu__school {
-              font-size: 35px;
+              font-size: 25px;
 
               .edu__locaTime {
-                font-size: 25px;
+                font-size: 18px;
               }
             }
           }
@@ -158,17 +164,17 @@
             gap: 18px;
 
             .edu__logo {
-              width: 108px;
-              height: 108px;
+              width: 104px;
+              height: 104px;
             }
             .edu__degree {
-              font-size: 30px;
+              font-size: 25px;
             }
             .edu__major {
-              font-size: 35px;
+              font-size: 32px;
             }
             .edu__minor {
-              font-size: 22px;
+              font-size: 18px;
             }
           }
         }
@@ -177,50 +183,50 @@
   }
 }
 
-/* LargeDesktop --------------------------------------------------------------------------------------------------------------------------------- */
-@include f.respond-to(large-desktop) {
+/* Desktop --------------------------------------------------------------------------------------------------------------------------------- */
+@include f.respond-to(desktop) {
   .education {
     .container {
       .grid-1 {
         align-items: center;
 
         .edu__title {
-          font-size: clamp(70px, 4.5vw, 250px);
+          font-size: clamp(50px, 5vh, 140px);
           margin: 0;
         }
       }
 
       .grid-4 {
+        padding-top: 0;
         .edu__stage {
-          gap: clamp(30px, 5vh, 80px);
+          gap: clamp(30px, 3.7vh, 90px);
           .edu__item {
             .edu__school {
-              font-size: clamp(35px, 1.8vw, 90px);
-              margin-bottom: clamp(10px, 1vw, 50px);
+              font-size: clamp(25px, 3vh, 70px);
+              margin-bottom: clamp(10px, 1vh, 50px);
 
               .edu__locaTime {
-                font-size: clamp(25px, 1.3vw, 70px);
-                margin-top: clamp(8px, 0.4vw, 20px);
+                font-size: clamp(18px, 2.2vh, 70px);
               }
             }
           }
 
           .edu__body {
-            gap: clamp(18px, 0.9vw, 35px);
+            gap: clamp(18px, 2.2vh, 50px);
 
             .edu__logo {
-              width: clamp(108px, 5.6vw, 240px);
-              height: clamp(108px, 5.6vw, 240px);
+              width: clamp(104px, 13vh, 300px);
+              height: clamp(104px, 13vh, 300px);
             }
             .edu__degree {
-              font-size: clamp(30px, 1.5vw, 70px);
+              font-size: clamp(25px, 3.1vh, 70px);
             }
             .edu__major {
-              font-size: clamp(35px, 1.8vw, 90px);
-              margin-top: clamp(3px, 0.1vw, 20px)
+              font-size: clamp(32px, 4vh, 90px);
+              margin-top: clamp(3px, 0.2vh, 30px)
             }
             .edu__minor {
-              font-size: clamp(22px, 1.1vw, 55px);
+              font-size: clamp(18px, 2.2vh, 50px);
             }
           }
         }
