@@ -27,10 +27,9 @@
 .nav__wrap {
   display: flex;
   align-items: center;
-  justify-content: start;
+  justify-content: center;
   height: 100%;
-  padding-left: 15px;
-  gap: clamp(5px, 3vw, 40px);
+  gap: 12px;
   margin: 0 auto;
   overflow-x: hidden;
 }

@@ -29,11 +29,8 @@ export default function Home() {
         />
       )}
 
-      {/* 스냅 컨테이너 (Home은 섹션 1개) */}
       <main className="homePage">
-        <section className="homeSec">
-          <HomeSection />
-        </section>
+        <HomeSection />
       </main>
     </>
   );

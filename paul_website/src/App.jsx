@@ -1,6 +1,8 @@
 import { useEffect } from "react";
 import { useLocation, Routes, Route } from "react-router-dom";
 
+import VerticalGuides from "./components/debug.jsx";
+
 import Home from "./pages/Home.jsx";
 import WhoAmI from "./pages/WhoAmI.jsx";
 import Daily from "./pages/Daily.jsx";
@@ -35,6 +37,8 @@ export default function App() {
       </Routes>
 
       <ScrollBySpace />
+
+      {/* <VerticalGuides /> */}
     </>
   );
 }
